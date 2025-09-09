@@ -1,0 +1,41 @@
+===== OLS results for 2023 | ext_2023 =====
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               ext_2023   R-squared:                       0.862
+Model:                            OLS   Adj. R-squared:                  0.861
+Method:                 Least Squares   F-statistic:                     1085.
+Date:                Sat, 30 Aug 2025   Prob (F-statistic):               0.00
+Time:                        01:01:18   Log-Likelihood:                -2992.9
+No. Observations:                1572   AIC:                             6006.
+Df Residuals:                    1562   BIC:                             6059.
+Df Model:                           9                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         41.6957      1.030     40.481      0.000      39.675      43.716
+BCR            0.0571      0.007      7.831      0.000       0.043       0.071
+BHV            0.0112      0.008      1.333      0.183      -0.005       0.028
+SVF            7.7264      1.007      7.675      0.000       5.752       9.701
+NDVI         -28.1280      0.957    -29.401      0.000     -30.005     -26.251
+EV            -0.0162      0.001    -11.795      0.000      -0.019      -0.014
+WR            -0.1767      0.004    -48.750      0.000      -0.184      -0.170
+Dist_W         0.0018      0.042      0.044      0.965      -0.080       0.083
+Dist_P         0.1317      0.065      2.040      0.042       0.005       0.258
+Dist_M        -0.0580      0.023     -2.480      0.013      -0.104      -0.012
+==============================================================================
+Omnibus:                      129.567   Durbin-Watson:                   0.700
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              252.099
+Skew:                          -0.546   Prob(JB):                     1.81e-55
+Kurtosis:                       4.629   Cond. No.                     2.44e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.44e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+ext_2023 Shapiro-Wilk: stat 0.9817, p-value 0.0000
+ext_2023 Breusch-Pagan: F-stat 33.8316, p-value 0.0000
+('WARNING: ', 1392, ' is an island (no neighbors)')
+('WARNING: ', 1571, ' is an island (no neighbors)')
+ext_2023 Moran's I: 0.6447, p-value: 0.0010

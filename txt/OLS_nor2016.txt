@@ -1,0 +1,45 @@
+===== OLS results for 2016 | nor_2016 =====
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               nor_2016   R-squared:                       0.854
+Model:                            OLS   Adj. R-squared:                  0.853
+Method:                 Least Squares   F-statistic:                     1202.
+Date:                Sat, 30 Aug 2025   Prob (F-statistic):               0.00
+Time:                        01:01:15   Log-Likelihood:                -2560.1
+No. Observations:                1861   AIC:                             5140.
+Df Residuals:                    1851   BIC:                             5196.
+Df Model:                           9                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         27.1870      0.526     51.691      0.000      26.155      28.219
+BCR            0.0070      0.004      1.787      0.074      -0.001       0.015
+BHV           -0.0013      0.004     -0.299      0.765      -0.010       0.007
+SVF           10.2558      0.532     19.265      0.000       9.212      11.300
+NDVI         -26.1655      0.765    -34.197      0.000     -27.666     -24.665
+EV            -0.0103      0.001    -15.435      0.000      -0.012      -0.009
+WR            -0.1308      0.002    -57.346      0.000      -0.135      -0.126
+Dist_W         0.0233      0.023      0.991      0.322      -0.023       0.069
+Dist_P         0.0884      0.036      2.426      0.015       0.017       0.160
+Dist_M         0.0531      0.012      4.275      0.000       0.029       0.078
+==============================================================================
+Omnibus:                      117.470   Durbin-Watson:                   1.025
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              408.536
+Skew:                           0.227   Prob(JB):                     1.94e-89
+Kurtosis:                       5.250   Cond. No.                     2.71e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.71e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+nor_2016 Shapiro-Wilk: stat 0.9768, p-value 0.0000
+nor_2016 Breusch-Pagan: F-stat 35.2427, p-value 0.0000
+('WARNING: ', 1308, ' is an island (no neighbors)')
+('WARNING: ', 1377, ' is an island (no neighbors)')
+('WARNING: ', 1411, ' is an island (no neighbors)')
+('WARNING: ', 1471, ' is an island (no neighbors)')
+('WARNING: ', 1525, ' is an island (no neighbors)')
+('WARNING: ', 1690, ' is an island (no neighbors)')
+nor_2016 Moran's I: 0.4579, p-value: 0.0010
