@@ -167,7 +167,8 @@ partial SDM
 
 equation
 
-$$LST = \\beta\_0 + \\rho W\\ln(LST) + \\beta\_1 BCR + \\beta\_2 BHV + \\beta\_3 NDVI + \\beta\_4 SVF + \\beta\_5 EV + \\beta\_6 WR + \\beta\_7 DistWB + \\beta\_8 DistGL + \\beta\_9 DistMT + \\theta\_1 WBCR + \\theta\_2 WBHV + \\theta\_3 WNDVI + \\theta\_4 WSVF + \\theta\_5 WEV + \\theta\_6 WWR + \\varepsilon, \\ \\varepsilon \\sim N(0, \\sigma^2 I)$$ LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I)
+$$LST = \\beta\_0 + \\rho W\\ln(LST) + \\beta\_1 BCR + \\beta\_2 BHV + \\beta\_3 NDVI + \\beta\_4 SVF + \\beta\_5 EV + \\beta\_6 WR + \\beta\_7 DistWB + \\beta\_8 DistGL + \\beta\_9 DistMT + \\theta\_1 WBCR + \\theta\_2 WBHV + \\theta\_3 WNDVI + \\theta\_4 WSVF + \\theta\_5 WEV + \\theta\_6 WWR + \\varepsilon, \\ \\varepsilon \\sim N(0, \\sigma^2 I)$$ 
+LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I)
 
 codes
 
@@ -185,29 +186,15 @@ codes
                         name_w=w_name, name_ds=ds_name,
                         spat_diag=True, spat_impacts=['full'])
 
-result\_nor\_2016
 
-nor\_2016 = 23.2855 + 0.5826\*Wnor\_2016 + 0.0338\*BCR + 0.0128\*BHV + 10.9005\*SVF + -20.0875\*NDVI + -0.0123\*EV + -0.1102\*WR + -0.0086\*Dist\_W + -0.0056\*Dist\_P + -0.0228\*Dist\_M + -0.1100\*W\_BCR + -0.1021\*W\_BHV + -16.4776\*W\_SVF + 2.6954\*W\_NDVI + 0.0050\*W\_EV + 0.0332\*W\_WR + 0.5826\*W\_nor\_2016
-
-result\_ext\_2016
-
-ext\_2016 = 33.0126 + 0.5725\*Wext\_2016 + 0.0520\*BCR + 0.0118\*BHV + 12.5920\*SVF + -37.3964\*NDVI + -0.0154\*EV + -0.1850\*WR + -0.0849\*Dist\_W + -0.0030\*Dist\_P + -0.0828\*Dist\_M + -0.1396\*W\_BCR + -0.1200\*W\_BHV + -21.7296\*W\_SVF + 14.0294\*W\_NDVI + 0.0047\*W\_EV + 0.0758\*W\_WR + 0.5725\*W\_ext\_2016
-
-result\_hr\_2016
-
-hr\_2016 = -9.1532 + 0.8417\*Whr\_2016 + -0.0197\*BCR + 0.0003\*BHV + -1.9617\*SVF + 17.0564\*NDVI + 0.0032\*EV + 0.0734\*WR + 0.0407\*Dist\_W + -0.0050\*Dist\_P + 0.0409\*Dist\_M + 0.0547\*W\_BCR + 0.0456\*W\_BHV + 8.5564\*W\_SVF + -13.9486\*W\_NDVI + 0.0001\*W\_EV + -0.0581\*W\_WR + 0.8417\*W\_hr\_2016
-
-result\_nor\_2023
-
-nor\_2023 = 30.1599 + 0.5751\*Wnor\_2023 + 0.0448\*BCR + 0.0154\*BHV + 10.7982\*SVF + -26.2233\*NDVI + -0.0125\*EV + -0.1693\*WR + -0.1100\*Dist\_W + -0.0776\*Dist\_P + -0.0106\*Dist\_M + -0.1046\*W\_BCR + -0.1183\*W\_BHV + -20.6142\*W\_SVF + 12.8149\*W\_NDVI + -0.0005\*W\_EV + 0.0747\*W\_WR + 0.5751\*W\_nor\_2023
-
-result\_ext\_2023
-
-ext\_2023 = 29.3256 + 0.7471\*Wext\_2023 + 0.0476\*BCR + 0.0144\*BHV + 12.4025\*SVF + -27.3378\*NDVI + -0.0127\*EV + -0.1678\*WR + -0.0464\*Dist\_W + -0.0227\*Dist\_P + -0.0636\*Dist\_M + -0.1205\*W\_BCR + -0.1437\*W\_BHV + -28.2722\*W\_SVF + 18.7731\*W\_NDVI + 0.0013\*W\_EV + 0.1100\*W\_WR + 0.7471\*W\_ext\_2023
-
-result\_hr\_2023
-
-hr\_2023 = -1.1990 + 0.9467\*Whr\_2023 + 0.0010\*BCR + 0.0047\*BHV + -0.7294\*SVF + 1.4199\*NDVI + -0.0001\*EV + 0.0003\*WR + -0.0084\*Dist\_W + -0.0002\*Dist\_P + 0.0124\*Dist\_M + 0.0002\*W\_BCR + 0.0001\*W\_BHV + 1.7678\*W\_SVF + -1.4593\*W\_NDVI + 0.0003\*W\_EV + -0.0013\*W\_WR + 0.9467\*W\_hr\_2023
+|type| formula|
+|----|--------|
+|result\_nor\_2016 |nor\_2016 = 23.2855 + 0.5826\*Wnor\_2016 + 0.0338\*BCR + 0.0128\*BHV + 10.9005\*SVF + -20.0875\*NDVI + -0.0123\*EV + -0.1102\*WR + -0.0086\*Dist\_W + -0.0056\*Dist\_P + -0.0228\*Dist\_M + -0.1100\*W\_BCR + -0.1021\*W\_BHV + -16.4776\*W\_SVF + 2.6954\*W\_NDVI + 0.0050\*W\_EV + 0.0332\*W\_WR + 0.5826\*W\_nor\_2016|
+|result\_ext\_2016 |ext\_2016 = 33.0126 + 0.5725\*Wext\_2016 + 0.0520\*BCR + 0.0118\*BHV + 12.5920\*SVF + -37.3964\*NDVI + -0.0154\*EV + -0.1850\*WR + -0.0849\*Dist\_W + -0.0030\*Dist\_P + -0.0828\*Dist\_M + -0.1396\*W\_BCR + -0.1200\*W\_BHV + -21.7296\*W\_SVF + 14.0294\*W\_NDVI + 0.0047\*W\_EV + 0.0758\*W\_WR + 0.5725\*W\_ext\_2016|
+|result\_hr\_2016  |hr\_2016 = -9.1532 + 0.8417\*Whr\_2016 + -0.0197\*BCR + 0.0003\*BHV + -1.9617\*SVF + 17.0564\*NDVI + 0.0032\*EV + 0.0734\*WR + 0.0407\*Dist\_W + -0.0050\*Dist\_P + 0.0409\*Dist\_M + 0.0547\*W\_BCR + 0.0456\*W\_BHV + 8.5564\*W\_SVF + -13.9486\*W\_NDVI + 0.0001\*W\_EV + -0.0581\*W\_WR + 0.8417\*W\_hr\_2016|
+|result\_nor\_2023 |nor\_2023 = 30.1599 + 0.5751\*Wnor\_2023 + 0.0448\*BCR + 0.0154\*BHV + 10.7982\*SVF + -26.2233\*NDVI + -0.0125\*EV + -0.1693\*WR + -0.1100\*Dist\_W + -0.0776\*Dist\_P + -0.0106\*Dist\_M + -0.1046\*W\_BCR + -0.1183\*W\_BHV + -20.6142\*W\_SVF + 12.8149\*W\_NDVI + -0.0005\*W\_EV + 0.0747\*W\_WR + 0.5751\*W\_nor\_2023|
+|result\_ext\_2023 |ext\_2023 = 29.3256 + 0.7471\*Wext\_2023 + 0.0476\*BCR + 0.0144\*BHV + 12.4025\*SVF + -27.3378\*NDVI + -0.0127\*EV + -0.1678\*WR + -0.0464\*Dist\_W + -0.0227\*Dist\_P + -0.0636\*Dist\_M + -0.1205\*W\_BCR + -0.1437\*W\_BHV + -28.2722\*W\_SVF + 18.7731\*W\_NDVI + 0.0013\*W\_EV + 0.1100\*W\_WR + 0.7471\*W\_ext\_2023|
+|result\_hr\_2023 |hr\_2023 = -1.1990 + 0.9467\*Whr\_2023 + 0.0010\*BCR + 0.0047\*BHV + -0.7294\*SVF + 1.4199\*NDVI + -0.0001\*EV + 0.0003\*WR + -0.0084\*Dist\_W + -0.0002\*Dist\_P + 0.0124\*Dist\_M + 0.0002\*W\_BCR + 0.0001\*W\_BHV + 1.7678\*W\_SVF + -1.4593\*W\_NDVI + 0.0003\*W\_EV + -0.0013\*W\_WR + 0.9467\*W\_hr\_2023|
 
 model
 
