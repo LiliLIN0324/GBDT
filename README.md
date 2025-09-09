@@ -1,7 +1,3 @@
- 文件下载页面 .code-block { background-color: #f5f5f5; /\* 灰色背景 \*/ border: 1px solid #ddd; padding: 10px; overflow-x: auto; /\* 横向滚动 \*/ white-space: pre; /\* 保留空格和换行 \*/ font-family: Consolas, "Courier New", monospace; font-size: 14px; border-radius: 5px; max-height: 400px; /\* 高度限制 \*/ } body { margin: 0; padding: 20px; font-family: Arial, sans-serif; } /\* 目录样式 \*/ #toc { background: #f9f9f9; padding: 10px 15px; border: 1px solid #ccc; margin-bottom: 20px; } #toc h2 { margin-top: 0; } #toc ul { list-style: none; padding-left: 0; } #toc li { margin: 5px 0; } #toc a { text-decoration: none; color: #007BFF; } #toc a:hover { text-decoration: underline; } /\* 表格和图片样式 \*/ table { border-collapse: collapse; margin-bottom: 10px; } th, td { border: 1px solid #ccc; padding: 10px; white-space: nowrap; text-align: center; vertical-align: top; } td img { display: block; margin: 0px; } /\* max-width: 100%; \*/ figcaption { font-size: 12px; text-align: center; } h2, h3, h5 { margin-top: 10px; margin-bottom: 5px; }
-
-目录
---
 
 📂 Assessing Urban Heat Resilience: Nonlinear Impacts of Urban Form Factors Across Scales Using Machine Learning
 ================================================================================================================
@@ -19,10 +15,9 @@ Lin Lili
 
 0 - grid information - based on 480m
 ------------------------------------
-
-![grid_original](fig/grid_original.jpg)
-
-![grid_original_satellite](fig/grid_original_satellite.jpg)
+| grid_original                           | grid_original_satellite                                     |
+|-----------------------------------------|-------------------------------------------------------------|
+| ![grid_original](fig/grid_original.jpg) | ![grid_original_satellite](fig/grid_original_satellite.jpg) |
 
 #### grid valid information
 
@@ -30,13 +25,9 @@ Lin Lili
 
 ![grid_valid_num](fig/grid_valid_num.png)
 
-2016 (N = 1861)
-
-2023 (N= 1572)
-
-![G480_2016](fig/G480_2016.png)
-
-![G480_2023](fig/G480_2023.png)
+|2016 (N = 1861)                |2023 (N= 1572)                 |
+|-------------------------------|-------------------------------|
+|![G480_2016](fig/G480_2016.png)|![G480_2023](fig/G480_2023.png)|
 
 1 - Air condition and AT (apperant temperature)
 -----------------------------------------------
@@ -49,7 +40,8 @@ Lin Lili
 
 然而，由于所有有效数据都不太好↓
 
-![其他天情况](excel/其他天情况.png) ![其他天情况](excel/weather condition on pairs.png)  
+![其他天情况](excel/其他天情况.png) 
+![其他天情况](excel/weather_condition_on_pairs.png) 
 Final pairs : 20160924 vs 20160807  
 Final pairs : 20230616 vs 20230819
 
@@ -64,337 +56,81 @@ Final pairs : 20230616 vs 20230819
 
 ### 02 Comparison of LST data (original)
 
-Year
+| Year | Normal heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Extreme heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Heat Resilience (Valid Area Ratio)          |
+|------|--------------------------------------------------------------------|---------------------------------------------------------------------|-----------------------------------------|
+| 2016 | ![](fig/20160924.jpg) 27.7, 47.51, 99.46%, 11:11:17 | ![](fig/20160807.jpg) 34.3, 97.47, 82.53%, 11:11:04               | ![](fig/2016_HR.jpg) 82.10%            |
+| 2023 | ![](fig/20230616.jpg) 28.4, 53.95, 99.00%, 11:10:22  |  ![](fig/20230819.jpg) 33.7, 95.68, 72.66%, 11:10:50                | ![](fig/2023_HR.jpg)  72.25%           |
 
-Normal heat day
-
-Extreme heat day
-
-Heat Resilience
-
-2016
-
-![](fig/20160924.jpg)
-
-20160924  
-27.7 AT  
-47.51 percentile  
-99.46% non cloud ratio  
-LOCAL\_TIME = 11:11:17
-
-![](fig/20160807.jpg)
-
-20160807  
-34.3 AT  
-97.47 percentile  
-82.53% non cloud ratio  
-LOCAL\_TIME = 11:11:04
-
-![](fig/2016 HR.jpg)
-
-2016 HR  
-82.10% valid area ratio
-
-2023
-
-![](fig/20230616.jpg)
-
-20230616  
-28.4 AT  
-53.95 percentile  
-99.00% non cloud ratio  
-LOCAL\_TIME = 11:10:22
-
-![](fig/20230819.jpg)
-
-20230819  
-33.7 AT  
-95.68 percentile  
-72.66% non cloud ratio  
-LOCAL\_TIME = 11:10:50
-
-![](fig/2023 HR.jpg)
-
-2023 HR  
-72.25% valid area ratio
 
 ### 03 Comparison of LST data based on Grid 480m(2016, 2023)
 
-Year
-
-Normal heat day
-
-Extreme heat day
-
-Heat Resilience
-
-2016
-
-![](fig/G480_nor2016.jpg)
-
-20160924
-
-![](fig/G480_ext2016.jpg)
-
-20160807
-
-![](fig/G480_hr2016.jpg)
-
-2016 HR
-
-2023
-
-![](fig/G480_nor2023.jpg)
-
-20230616
-
-![](fig/G480_ext2023.jpg)
-
-20230819
-
-![](fig/G480_hr2023.jpg)
-
-2023 HR
-
+| Year | Normal heat day (Fig, Date)         | Extreme heat day (Fig, Date)        | Heat Resilience (Fig, Date)   |
+|------|-------------------------------------|-------------------------------------|-------------------------------|
+| 2016 | ![](fig/G480_nor2016.jpg)<br>20160924 | ![](fig/G480_ext2016.jpg)<br>20160807 | ![](fig/G480_hr2016.jpg)<br>2016 HR |
+| 2023 | ![](fig/G480_nor2023.jpg)<br>20230616 | ![](fig/G480_ext2023.jpg)<br>20230819 | ![](fig/G480_hr2023.jpg)<br>2023 HR |
 ### 04 Comparison of Features data (2016,2023)
 
-BCR
-
-BHV
-
-SVF
-
-Variable
-
-![](fig/G480_V_BCR.jpg)2016
-
-![](fig/G480_V_BCR_2023.jpg)2023
-
-![](fig/G480_V_BHV.jpg)2016
-
-![](fig/G480_V_BHV_2023.jpg)2023
-
-![](fig/G480_V_SVF.jpg)2016
-
-![](fig/G480_V_SVF_2023.jpg)2023
-
-NDVI
-
-EV
-
-WR
-
-Variable
-
-![](fig/G480_V_NDVI.jpg)2016
-
-![](fig/G480_V_NDVI_2023.jpg)2023
-
-![](fig/G480_V_EV.jpg)2016
-
-![](fig/G480_V_EV_2023.jpg)2023
-
-![](fig/G480_V_WR.jpg)2016
-
-![](fig/G480_V_WR_2023.jpg)2023
-
-Dist\_P
-
-Dist\_M
-
-Dist\_W
-
-Variable
-
-![](fig/G480_V_DistP.jpg)2016
-
-![](fig/G480_V_DistP_2023.jpg)2023
-
-![](fig/G480_V_DistM.jpg)2016
-
-![](fig/G480_V_DistM_2023.jpg)2023
-
-![](fig/G480_V_DistW.jpg)2016
-
-![](fig/G480_V_DistW_2023.jpg)2023
+| Features| 2016                            | 2023                            |
+|---------|---------------------------------|---------------------------------|
+| BCR     | ![](fig/G480_V_BCR.jpg)         | ![](fig/G480_V_BCR_2023.jpg)    |
+| BHV     | ![](fig/G480_V_BHV.jpg)         | ![](fig/G480_V_BHV_2023.jpg)    |
+| SVF     | ![](fig/G480_V_SVF.jpg)         | ![](fig/G480_V_SVF_2023.jpg)    |
+| NDVI    | ![](fig/G480_V_NDVI.jpg)        | ![](fig/G480_V_NDVI_2023.jpg)   |
+| EV      | ![](fig/G480_V_EV.jpg)          | ![](fig/G480_V_EV_2023.jpg)     |
+| WR      | ![](fig/G480_V_WR.jpg)          | ![](fig/G480_V_WR_2023.jpg)     |
+| Dist_P  | ![](fig/G480_V_DistP.jpg)       | ![](fig/G480_V_DistP_2023.jpg)  |
+| Dist_M  | ![](fig/G480_V_DistM.jpg)       | ![](fig/G480_V_DistM_2023.jpg)  |
+| Dist_W  | ![](fig/G480_V_DistW.jpg)       | ![](fig/G480_V_DistW_2023.jpg)  |
 
 3 - spatial regression model result
 -----------------------------------
 
 ### 00 correlation test
 
-Year
-
-pearson correlation
-
-spearman correlation
-
-VIF score
-
-2016
-
-![](fig/2016_pearson_corr.png)
-
-![](fig/2016_spearman_corr.png)
-
-![](excel/2016 VIF score.png)
-
-2023
-
-![](fig/2023_pearson_corr.png)
-
-![](fig/2023_spearman_corr.png)
-
-![](excel/2023 VIF score.png)
-
-  
-the BHA score in spearman >=0.7 when it intersect with BHV and SVF. Eventually, we decide to delete this variable.
-
+| Year | Pearson correlation            | Spearman correlation            | VIF score                     |
+|------|--------------------------------|---------------------------------|-------------------------------|
+| 2016 | ![](fig/2016_pearson_corr.png) | ![](fig/2016_spearman_corr.png) | ![](excel/2016_VIF_score.png) |
+| 2023 | ![](fig/2023_pearson_corr.png) | ![](fig/2023_spearman_corr.png) | ![](excel/2023_VIF_score.png) |
 ### 00 error information
 
-2016
-
-2023
-
-![](fig/2016 isolated grid.png)  
-1308, 1377, 1411, 1471, 1525, 1690
-
-![](fig/2023 isolated grid.png)  
-1392, 1571
+|      | 2016          | 2023       |
+|------|-----------------------------------------------------------|-----------------------------------|
+| unit | ![](fig/2016_isolated_grid.png) <br>1308, 1377, 1411, 1471, 1525, 1690 | ![](fig/2023_isolated_grid.png) <br>1392, 1571 |
 
 ### 01 OLS
 
 y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
 
-Year
-
-Normal heat day
-
-Extreme heat day
-
-HR
-
-2016
-
-R²: 0.8539  
-RMSE: 0.9577
-
-R²: 0.9055  
-RMSE: 1.2423
-
-R²: 0.8102  
-RMSE: 0.7770
-
-2023
-
-R²: 0.9206  
-RMSE: 1.1580
-
-R²: 0.8622  
-RMSE: 1.6241
-
-R²: 0.1298  
-RMSE: 1.3000
-
-Year
-
-normal heat day
-
-extreme heat day
-
-heat resilience
-
-2016
-
-2023
+| Year | Type              | R²     | RMSE    |
+|------|-------------------|--------|---------|
+| 2016 | Normal heat day   | 0.8539 | 0.9577  |
+| 2016 | Extreme heat day  | 0.9055 | 1.2423  |
+| 2016 | Heat resilience   | 0.8102 | 0.7770  |
+| 2023 | Normal heat day   | 0.9206 | 1.1580  |
+| 2023 | Extreme heat day  | 0.8622 | 1.6241  |
+| 2023 | Heat resilience   | 0.1298 | 1.3000  |
 
 ### 02 Moran's I
 
-Year
-
-Normal heat day
-
-Extreme heat day
-
-HR
-
-2016
-
-Moran's I: 0.6881  
-p-value: 0.0010  
-Expected I: -0.0006  
-Variance: 0.0002
-
-Moran's I: 0.6760  
-p-value: 0.0010  
-Expected I: -0.0006  
-Variance: 0.0002
-
-Moran's I: 0.6699  
-p-value: 0.0010  
-Expected I: -0.0006  
-Variance: 0.0002
-
-2023
-
-Moran's I: 0.6775  
-p-value: 0.0010  
-Expected I: -0.0007  
-Variance: 0.0002
-
-Moran's I: 0.7007  
-p-value: 0.0010  
-Expected I: -0.0007  
-Variance: 0.0002
-
-Moran's I: 0.8606  
-p-value: 0.0010  
-Expected I: -0.0007  
-Variance: 0.0002
+| Year | Type              | Moran's I | p-value | Expected I | Variance  |
+|------|-------------------|-----------|---------|------------|-----------|
+| 2016 | Normal heat day   | 0.6881    | 0.0010  | -0.0006    | 0.0002    |
+| 2016 | Extreme heat day  | 0.6760    | 0.0010  | -0.0006    | 0.0002    |
+| 2016 | Heat resilience   | 0.6699    | 0.0010  | -0.0006    | 0.0002    |
+| 2023 | Normal heat day   | 0.6775    | 0.0010  | -0.0007    | 0.0002    |
+| 2023 | Extreme heat day  | 0.7007    | 0.0010  | -0.0007    | 0.0002    |
+| 2023 | Heat resilience   | 0.8606    | 0.0010  | -0.0007    | 0.0002    |
 
 ### 03 LM test
 
-Year
-
-Normal heat day
-
-Extreme heat day
-
-HR
-
-2016
-
-LM-Lag (lml) : 211.3825, p-value = 6.859e-48  
-LM-Error (lme) : 1652.8657, p-value = 0  
-Robust LM-Lag (rlml) : 16.2983, p-value = 5.411e-05  
-Robust LM-Error (rlme) : 1457.7815, p-value = 0
-
-LM-Lag (lml) : 248.7858, p-value = 4.777e-56  
-LM-Error (lme) : 1839.4007, p-value = 0  
-Robust LM-Lag (rlml) : 30.7201, p-value = 2.981e-08  
-Robust LM-Error (rlme) : 1621.3350, p-value = 0
-
-LM-Lag (lml) : 706.0370, p-value = 1.455e-155  
-LM-Error (lme) : 2894.3563, p-value = 0  
-Robust LM-Lag (rlml) : 6.0687, p-value = 0.01376  
-Robust LM-Error (rlme) : 2194.3880, p-value = 0
-
-2023
-
-LM-Lag (lml) : 261.6000, p-value = 7.687e-59  
-LM-Error (lme) : 1403.3011, p-value = 4.028e-307  
-Robust LM-Lag (rlml) : 22.6666, p-value = 1.927e-06  
-Robust LM-Error (rlme) : 1164.3677, p-value = 3.383e-255
-
-LM-Lag (lml) : 641.0536, p-value = 1.971e-141  
-LM-Error (lme) : 2286.3265, p-value = 0  
-Robust LM-Lag (rlml) : 52.8418, p-value = 3.615e-13  
-Robust LM-Error (rlme) : 1698.1147, p-value = 0
-
-LM-Lag (lml) : 3168.4077, p-value = 0  
-LM-Error (lme) : 3154.6372, p-value = 0  
-Robust LM-Lag (rlml) : 80.0721, p-value = 3.61e-19  
-Robust LM-Error (rlme) : 66.3016, p-value = 3.869e-16
+| Year | Type              | LM-Lag (lml) | p-value (lml) | LM-Error (lme) | p-value (lme) | Robust LM-Lag (rlml) | p-value (rlml) | Robust LM-Error (rlme) | p-value (rlme) |
+|------|-------------------|--------------|--------------|----------------|--------------|----------------------|----------------|------------------------|----------------|
+| 2016 | Normal heat day   | 211.3825     | 6.859e-48    | 1652.8657      | 0            | 16.2983              | 5.411e-05      | 1457.7815              | 0              |
+| 2016 | Extreme heat day  | 248.7858     | 4.777e-56    | 1839.4007      | 0            | 30.7201              | 2.981e-08      | 1621.3350              | 0              |
+| 2016 | Heat resilience   | 706.0370     | 1.455e-155   | 2894.3563      | 0            | 6.0687               | 0.01376        | 2194.3880              | 0              |
+| 2023 | Normal heat day   | 261.6000     | 7.687e-59    | 1403.3011      | 4.028e-307   | 22.6666              | 1.927e-06      | 1164.3677              | 3.383e-255     |
+| 2023 | Extreme heat day  | 641.0536     | 1.971e-141   | 2286.3265      | 0            | 52.8418              | 3.615e-13      | 1698.1147              | 0              |
+| 2023 | Heat resilience   | 3168.4077    | 0            | 3154.6372      | 0            | 80.0721              | 3.61e-19       | 66.3016                | 3.869e-16      |
 
 ### 04 LR test
 
