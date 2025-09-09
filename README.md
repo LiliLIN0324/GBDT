@@ -160,95 +160,35 @@ explanatory\_vars =
 ### 06 final model select: partial SDEM ( partial SDM)
 
 #### 01 Equation
+<!-- LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I) -->
 
-model
+|model   |**partial SDM**|
+|--------|---------------------------------------------------------------------------------------------------------------------------------------------|
+|equation|$LST = \beta_0 + \rho W\ln(LST) + \beta_1 BCR + \beta_2 BHV + \beta_3 NDVI + \beta_4 SVF + \beta_5 EV + \beta_6 WR + \beta_7 DistWB + \beta_8 DistGL + \beta_9 DistMT + \theta_1 WBCR + \theta_2 WBHV + \theta_3 WNDVI + \theta_4 WSVF + \theta_5 WEV + \theta_6 WWR + \varepsilon,\ \varepsilon \sim N(0, \sigma^2 I)$|
+|result\_nor\_2016 | nor\_2016 = 23.2855 + 0.5826\*Wnor\_2016 + 0.0338\*BCR + 0.0128\*BHV + 10.9005\*SVF + -20.0875\*NDVI + -0.0123\*EV + -0.1102\*WR + -0.0086\*Dist\_W + -0.0056\*Dist\_P + -0.0228\*Dist\_M + -0.1100\*W\_BCR + -0.1021\*W\_BHV + -16.4776\*W\_SVF + 2.6954\*W\_NDVI + 0.0050\*W\_EV + 0.0332\*W\_WR + 0.5826\*W\_nor\_2016|
+|result\_ext\_2016 | ext\_2016 = 33.0126 + 0.5725\*Wext\_2016 + 0.0520\*BCR + 0.0118\*BHV + 12.5920\*SVF + -37.3964\*NDVI + -0.0154\*EV + -0.1850\*WR + -0.0849\*Dist\_W + -0.0030\*Dist\_P + -0.0828\*Dist\_M + -0.1396\*W\_BCR + -0.1200\*W\_BHV + -21.7296\*W\_SVF + 14.0294\*W\_NDVI + 0.0047\*W\_EV + 0.0758\*W\_WR + 0.5725\*W\_ext\_2016|
+|result\_hr\_2016  | hr\_2016 = -9.1532 + 0.8417\*Whr\_2016 + -0.0197\*BCR + 0.0003\*BHV + -1.9617\*SVF + 17.0564\*NDVI + 0.0032\*EV + 0.0734\*WR + 0.0407\*Dist\_W + -0.0050\*Dist\_P + 0.0409\*Dist\_M + 0.0547\*W\_BCR + 0.0456\*W\_BHV + 8.5564\*W\_SVF + -13.9486\*W\_NDVI + 0.0001\*W\_EV + -0.0581\*W\_WR + 0.8417\*W\_hr\_2016|
+|result\_nor\_2023 | nor\_2023 = 30.1599 + 0.5751\*Wnor\_2023 + 0.0448\*BCR + 0.0154\*BHV + 10.7982\*SVF + -26.2233\*NDVI + -0.0125\*EV + -0.1693\*WR + -0.1100\*Dist\_W + -0.0776\*Dist\_P + -0.0106\*Dist\_M + -0.1046\*W\_BCR + -0.1183\*W\_BHV + -20.6142\*W\_SVF + 12.8149\*W\_NDVI + -0.0005\*W\_EV + 0.0747\*W\_WR + 0.5751\*W\_nor\_2023|
+|result\_ext\_2023 | ext\_2023 = 29.3256 + 0.7471\*Wext\_2023 + 0.0476\*BCR + 0.0144\*BHV + 12.4025\*SVF + -27.3378\*NDVI + -0.0127\*EV + -0.1678\*WR + -0.0464\*Dist\_W + -0.0227\*Dist\_P + -0.0636\*Dist\_M + -0.1205\*W\_BCR + -0.1437\*W\_BHV + -28.2722\*W\_SVF + 18.7731\*W\_NDVI + 0.0013\*W\_EV + 0.1100\*W\_WR + 0.7471\*W\_ext\_2023|
+|result\_hr\_2023 | hr\_2023 = -1.1990 + 0.9467\*Whr\_2023 + 0.0010\*BCR + 0.0047\*BHV + -0.7294\*SVF + 1.4199\*NDVI + -0.0001\*EV + 0.0003\*WR + -0.0084\*Dist\_W + -0.0002\*Dist\_P + 0.0124\*Dist\_M + 0.0002\*W\_BCR + 0.0001\*W\_BHV + 1.7678\*W\_SVF + -1.4593\*W\_NDVI + 0.0003\*W\_EV + -0.0013\*W\_WR + 0.9467\*W\_hr\_2023|
 
-partial SDM
-
-equation
-
-$$LST = \\beta\_0 + \\rho W\\ln(LST) + \\beta\_1 BCR + \\beta\_2 BHV + \\beta\_3 NDVI + \\beta\_4 SVF + \\beta\_5 EV + \\beta\_6 WR + \\beta\_7 DistWB + \\beta\_8 DistGL + \\beta\_9 DistMT + \\theta\_1 WBCR + \\theta\_2 WBHV + \\theta\_3 WNDVI + \\theta\_4 WSVF + \\theta\_5 WEV + \\theta\_6 WWR + \\varepsilon, \\ \\varepsilon \\sim N(0, \\sigma^2 I)$$ 
-LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I)
-
-codes
-
-    w = libpysal.weights.DistanceBand.from_dataframe(data_gdf, threshold=1000, binary=False)
-                    w.transform = 'r'  # 行标准化
-                    yi = data[target].values.reshape(-1, 1)
-                    X_main = data[explanatory_vars].values
-                    WX_clean = lag_spatial(w, data[explanatory_vars_clean].values)
-                    X_all = np.hstack([np.ones((len(data), 1)), X_main, WX_clean])
-                    name_x = ['const'] + explanatory_vars + [f"W_{v}" for v in explanatory_vars_clean]
-                    # SDM
-                    models['SDM'] = ML_Lag(
-                        yi, X_all, w=w,
-                        name_y=target, name_x=name_x,
-                        name_w=w_name, name_ds=ds_name,
-                        spat_diag=True, spat_impacts=['full'])
+|model  |**partial SDEM**|
+|-------|--------------------------------------------------------------------------------------------------------------------|
+|equation|$LST = \beta\_0 + \beta\_1 BCR + \beta\_2 BHV + \beta\_3 NDVI + \beta\_4 SVF + \beta\_5 EV + \beta\_6 WR + \beta\_7 DistWB + \beta\_8 DistGL +\beta\_9 DistMT + \theta\_1 WBCR + \theta\_2 WBHV + \theta\_3 WNDVI + \theta\_4 WSVF + \theta\_5 WEV + \theta\_6 WWR + u, \quad u = \lambda W u +\varepsilon, \varepsilon \sim N(0, \sigma^2 I)$|
+|result\_nor\_2016| nor\_2016 = 27.5798 + 0.0203\*BCR + 0.0014\*BHV + 8.4274\*SVF + -21.4460\*NDVI + -0.0114\*EV + -0.1134\*WR + -0.0982\*Dist\_W + -0.0560\*Dist\_P + 0.0172\*Dist\_M + -0.0352\*W\_BCR + -0.0110\*W\_BHV + 3.3434\*W\_SVF + -10.5876\*W\_NDVI + 0.0039\*W\_EV + -0.0394\*W\_WR + 0.8184\*lambda|
+|result\_ext\_2016| ext\_2016 = 39.3798 + 0.0326\*BCR + -0.0036\*BHV + 8.9039\*SVF + -38.8294\*NDVI + -0.0148\*EV + -0.1873\*WR + -0.2271\*Dist\_W + -0.0456\*Dist\_P + -0.1242\*Dist\_M + -0.0248\*W\_BCR + 0.0113\*W\_BHV + 4.9234\*W\_SVF + -9.7617\*W\_NDVI + 0.0050\*W\_EV + -0.0444\*W\_WR + 0.8400\*lambda|
+|result\_hr\_2016| hr\_2016 = -11.9287 + -0.0118\*BCR + 0.0056\*BHV + -0.3798\*SVF + 17.4904\*NDVI + 0.0033\*EV + 0.0735\*WR + 0.0882\*Dist\_W + -0.0281\*Dist\_P + 0.1634\*Dist\_M + -0.0085\*W\_BCR + -0.0200\*W\_BHV + -1.7936\*W\_SVF + 0.7076\*W\_NDVI + -0.0013\*W\_EV + 0.0096\*W\_WR + 0.9190\*lambda|
+|result\_nor\_2023| nor\_2023 = 37.4249 + 0.0267\*BCR + 0.0033\*BHV + 7.7807\*SVF + -27.5380\*NDVI + -0.0122\*EV + -0.1727\*WR + -0.2168\*Dist\_W + -0.0881\*Dist\_P + 0.0103\*Dist\_M + -0.0011\*W\_BCR + 0.0098\*W\_BHV + 0.9387\*W\_SVF + -2.9640\*W\_NDVI + -0.0021\*W\_EV + -0.0292\*W\_WR + 0.8250\*lambda|
+|result\_ext\_2023| ext\_2023 = 40.0883 + 0.0256\*BCR + 0.0006\*BHV + 8.3616\*SVF + -29.4204\*NDVI + -0.0114\*EV + -0.1725\*WR + -0.2396\*Dist\_W + -0.2239\*Dist\_P + -0.1696\*Dist\_M + 0.0193\*W\_BCR + 0.0377\*W\_BHV + 2.9527\*W\_SVF + -4.2769\*W\_NDVI + 0.0026\*W\_EV + -0.0304\*W\_WR + 0.9065\*lambda|
+|result\_hr\_2023| hr\_2023 = -2.5438 + 0.0004\*BCR + 0.0032\*BHV + -0.6424\*SVF + 1.6928\*NDVI + -0.0007\*EV + 0.0005\*WR + 0.0621\*Dist\_W + 0.1557\*Dist\_P + 0.1643\*Dist\_M + -0.0177\*W\_BCR + -0.0218\*W\_BHV + -1.7902\*W\_SVF + 0.7802\*W\_NDVI + -0.0038\*W\_EV + -0.0004\*W\_WR + 0.9537\*lambda|
 
 
-|type| formula|
-|----|--------|
-|result\_nor\_2016 |nor\_2016 = 23.2855 + 0.5826\*Wnor\_2016 + 0.0338\*BCR + 0.0128\*BHV + 10.9005\*SVF + -20.0875\*NDVI + -0.0123\*EV + -0.1102\*WR + -0.0086\*Dist\_W + -0.0056\*Dist\_P + -0.0228\*Dist\_M + -0.1100\*W\_BCR + -0.1021\*W\_BHV + -16.4776\*W\_SVF + 2.6954\*W\_NDVI + 0.0050\*W\_EV + 0.0332\*W\_WR + 0.5826\*W\_nor\_2016|
-|result\_ext\_2016 |ext\_2016 = 33.0126 + 0.5725\*Wext\_2016 + 0.0520\*BCR + 0.0118\*BHV + 12.5920\*SVF + -37.3964\*NDVI + -0.0154\*EV + -0.1850\*WR + -0.0849\*Dist\_W + -0.0030\*Dist\_P + -0.0828\*Dist\_M + -0.1396\*W\_BCR + -0.1200\*W\_BHV + -21.7296\*W\_SVF + 14.0294\*W\_NDVI + 0.0047\*W\_EV + 0.0758\*W\_WR + 0.5725\*W\_ext\_2016|
-|result\_hr\_2016  |hr\_2016 = -9.1532 + 0.8417\*Whr\_2016 + -0.0197\*BCR + 0.0003\*BHV + -1.9617\*SVF + 17.0564\*NDVI + 0.0032\*EV + 0.0734\*WR + 0.0407\*Dist\_W + -0.0050\*Dist\_P + 0.0409\*Dist\_M + 0.0547\*W\_BCR + 0.0456\*W\_BHV + 8.5564\*W\_SVF + -13.9486\*W\_NDVI + 0.0001\*W\_EV + -0.0581\*W\_WR + 0.8417\*W\_hr\_2016|
-|result\_nor\_2023 |nor\_2023 = 30.1599 + 0.5751\*Wnor\_2023 + 0.0448\*BCR + 0.0154\*BHV + 10.7982\*SVF + -26.2233\*NDVI + -0.0125\*EV + -0.1693\*WR + -0.1100\*Dist\_W + -0.0776\*Dist\_P + -0.0106\*Dist\_M + -0.1046\*W\_BCR + -0.1183\*W\_BHV + -20.6142\*W\_SVF + 12.8149\*W\_NDVI + -0.0005\*W\_EV + 0.0747\*W\_WR + 0.5751\*W\_nor\_2023|
-|result\_ext\_2023 |ext\_2023 = 29.3256 + 0.7471\*Wext\_2023 + 0.0476\*BCR + 0.0144\*BHV + 12.4025\*SVF + -27.3378\*NDVI + -0.0127\*EV + -0.1678\*WR + -0.0464\*Dist\_W + -0.0227\*Dist\_P + -0.0636\*Dist\_M + -0.1205\*W\_BCR + -0.1437\*W\_BHV + -28.2722\*W\_SVF + 18.7731\*W\_NDVI + 0.0013\*W\_EV + 0.1100\*W\_WR + 0.7471\*W\_ext\_2023|
-|result\_hr\_2023 |hr\_2023 = -1.1990 + 0.9467\*Whr\_2023 + 0.0010\*BCR + 0.0047\*BHV + -0.7294\*SVF + 1.4199\*NDVI + -0.0001\*EV + 0.0003\*WR + -0.0084\*Dist\_W + -0.0002\*Dist\_P + 0.0124\*Dist\_M + 0.0002\*W\_BCR + 0.0001\*W\_BHV + 1.7678\*W\_SVF + -1.4593\*W\_NDVI + 0.0003\*W\_EV + -0.0013\*W\_WR + 0.9467\*W\_hr\_2023|
 
-model
-
-partial SDEM
-
-equation
-
-$$LST = \\beta\_0 + \\beta\_1 BCR + \\beta\_2 BHV + \\beta\_3 NDVI + \\beta\_4 SVF + \\beta\_5 EV + \\beta\_6 WR + \\beta\_7 DistWB + \\beta\_8 DistGL + \\beta\_9 DistMT + \\theta\_1 WBCR + \\theta\_2 WBHV + \\theta\_3 WNDVI + \\theta\_4 WSVF + \\theta\_5 WEV + \\theta\_6 WWR + u, \\quad u = \\lambda W u + \\varepsilon, \\ \\varepsilon \\sim N(0, \\sigma^2 I) $$ LST = β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + u, u = λWu + ε, ε∼N(0, σ²I)
-
-codes
-
-    w = libpysal.weights.DistanceBand.from_dataframe(data_gdf, threshold=1000, binary=False)
-                    w.transform = 'r'  # 行标准化
-                    yi = data[target].values.reshape(-1, 1)
-                    X_main = data[explanatory_vars].values
-                    WX_clean = lag_spatial(w, data[explanatory_vars_clean].values)
-                    X_all = np.hstack([np.ones((len(data), 1)), X_main, WX_clean])
-                    name_x = ['const'] + explanatory_vars + [f"W_{v}" for v in explanatory_vars_clean]
-                    # SDEM
-                    models['SDEM'] = ML_Error(
-                        yi, X_all, w=w,
-                        name_y=target, name_x=name_x,
-                        name_w=w_name, name_ds=ds_name,
-                        spat_diag=True)
-
-result\_nor\_2016
-
-nor\_2016 = 27.5798 + 0.0203\*BCR + 0.0014\*BHV + 8.4274\*SVF + -21.4460\*NDVI + -0.0114\*EV + -0.1134\*WR + -0.0982\*Dist\_W + -0.0560\*Dist\_P + 0.0172\*Dist\_M + -0.0352\*W\_BCR + -0.0110\*W\_BHV + 3.3434\*W\_SVF + -10.5876\*W\_NDVI + 0.0039\*W\_EV + -0.0394\*W\_WR + 0.8184\*lambda
-
-result\_ext\_2016
-
-ext\_2016 = 39.3798 + 0.0326\*BCR + -0.0036\*BHV + 8.9039\*SVF + -38.8294\*NDVI + -0.0148\*EV + -0.1873\*WR + -0.2271\*Dist\_W + -0.0456\*Dist\_P + -0.1242\*Dist\_M + -0.0248\*W\_BCR + 0.0113\*W\_BHV + 4.9234\*W\_SVF + -9.7617\*W\_NDVI + 0.0050\*W\_EV + -0.0444\*W\_WR + 0.8400\*lambda
-
-result\_hr\_2016
-
-hr\_2016 = -11.9287 + -0.0118\*BCR + 0.0056\*BHV + -0.3798\*SVF + 17.4904\*NDVI + 0.0033\*EV + 0.0735\*WR + 0.0882\*Dist\_W + -0.0281\*Dist\_P + 0.1634\*Dist\_M + -0.0085\*W\_BCR + -0.0200\*W\_BHV + -1.7936\*W\_SVF + 0.7076\*W\_NDVI + -0.0013\*W\_EV + 0.0096\*W\_WR + 0.9190\*lambda
-
-result\_nor\_2023
-
-nor\_2023 = 37.4249 + 0.0267\*BCR + 0.0033\*BHV + 7.7807\*SVF + -27.5380\*NDVI + -0.0122\*EV + -0.1727\*WR + -0.2168\*Dist\_W + -0.0881\*Dist\_P + 0.0103\*Dist\_M + -0.0011\*W\_BCR + 0.0098\*W\_BHV + 0.9387\*W\_SVF + -2.9640\*W\_NDVI + -0.0021\*W\_EV + -0.0292\*W\_WR + 0.8250\*lambda
-
-result\_ext\_2023
-
-ext\_2023 = 40.0883 + 0.0256\*BCR + 0.0006\*BHV + 8.3616\*SVF + -29.4204\*NDVI + -0.0114\*EV + -0.1725\*WR + -0.2396\*Dist\_W + -0.2239\*Dist\_P + -0.1696\*Dist\_M + 0.0193\*W\_BCR + 0.0377\*W\_BHV + 2.9527\*W\_SVF + -4.2769\*W\_NDVI + 0.0026\*W\_EV + -0.0304\*W\_WR + 0.9065\*lambda
-
-result\_hr\_2023
-
-hr\_2023 = -2.5438 + 0.0004\*BCR + 0.0032\*BHV + -0.6424\*SVF + 1.6928\*NDVI + -0.0007\*EV + 0.0005\*WR + 0.0621\*Dist\_W + 0.1557\*Dist\_P + 0.1643\*Dist\_M + -0.0177\*W\_BCR + -0.0218\*W\_BHV + -1.7902\*W\_SVF + 0.7802\*W\_NDVI + -0.0038\*W\_EV + -0.0004\*W\_WR + 0.9537\*lambda
-
-explanatory\_vars =  
-\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]  
-explanatory\_vars\_clean =  
-\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\]  
+explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
+explanatory\_vars\_clean =\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\] 
 X-> explanatory\_vars; WX -> explanatory\_vars\_clean
+
+
 
 #### 02 impact
 
@@ -278,13 +218,10 @@ SDEM
 
 ### 07 Residuals Test
 
-SDM
+|SDM                         |SDEM                         |
+|----------------------------|-----------------------------|
+|![](excel/SDM_residuals.png)|![](excel/SDEM_residuals.png)|
 
-SDEM
-
-![](excel/SDM_residuals.png)
-
-![](excel/SDEM_residuals.png)
 
 4 - GBDT model result
 ---------------------
@@ -295,42 +232,170 @@ SDEM
 
 ### 02 - hyperparameter tuning
 
-full codes↓`import geopandas as gpd import pandas as pd import numpy as np import os import re import matplotlib.pyplot as plt from sklearn.ensemble import GradientBoostingRegressor from sklearn.metrics import r2_score, mean_squared_error from sklearn.model_selection import RandomizedSearchCV from sklearn.inspection import PartialDependenceDisplay from sklearn.model_selection import train_test_split from sklearn.model_selection import RepeatedKFold from scipy.stats import randint, uniform, loguniform  # 文件夹路径 grid_folder = r'D:\seoul\grids\lst_map\final_clean\480_based'  # 变量定义 for year in [2016,2023]:     target_vars = [f'nor_{year}', f'ext_{year}', f'hr_{year}']     explanatory_vars = ['BCR', 'BHV',  'SVF', 'NDVI', 'EV', 'WR', 'Dist_W', 'Dist_P', 'Dist_M']    # 顺序很讲究     # 保存结果     all_results = []     pdp_records = []     r2_comparison = []      param_dist = {         'n_estimators': [4168], #4168         'learning_rate': loguniform(0.002, 0.355), #(0.002, 0.355)         'subsample': uniform(0.545, 0.414), # [0.545,0.958]         'max_depth' : randint(5, 14), # [5, 13]         'min_samples_split':[2], #2         'max_features': uniform(0.335, 0.582), #[0.335,0.916]         }      # === 主循环 ===     for filename in os.listdir(grid_folder):         if filename.endswith(f'city{year}_lst_ratio_grid_480m_bcr_bhv_ndvi_svf_ev_distbp_distmt_distwb_wr_xy.shp'):             input_path = os.path.join(grid_folder, filename)             match = re.search(r'(\d{3,5})m', filename)             grid_size = match.group(1)              gdf = gpd.read_file(input_path)             gdf_clean = gdf.replace([np.inf, -np.inf], np.nan).dropna(subset=target_vars + explanatory_vars)              for target in target_vars:                 X = gdf_clean[explanatory_vars]                 y = gdf_clean[target]                  # 数据划分                 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)                  gbdt = GradientBoostingRegressor(random_state=0)                 cv = RepeatedKFold(n_splits=5, n_repeats=20, random_state=0)                  search = RandomizedSearchCV(                     estimator=gbdt,                     param_distributions=param_dist,                     n_iter= 200,                     scoring='r2',                     cv=cv, # cross validation                     verbose=2,                     n_jobs=-1,                     random_state=0                 )                  search.fit(X_train, y_train)                  print(search.cv_results_.keys())                 results_df = pd.DataFrame(search.cv_results_)                 print(results_df.head())                 results_df.to_excel(f"GBDT_{target}_cv_results.xlsx", index=False)                  # 使用测试集评估                 best_model = search.best_estimator_                 y_train_pred = best_model.predict(X_train)                 y_test_pred = best_model.predict(X_test)                   r2_train = best_model.score(X_train, y_train)                 r2_test = r2_score(y_test, y_test_pred)                  rmse_train = np.sqrt(mean_squared_error(y_train, y_train_pred))                 rmse_test = np.sqrt(mean_squared_error(y_test, y_test_pred))                  print(f" {filename} | {target} 最佳参数: {search.best_params_} | R²_train={r2_train:.3f} | R²_test={r2_test:.3f}")                  for var, importance in zip(explanatory_vars, best_model.feature_importances_):                     all_results.append({                         'GridSize': grid_size,                         'Target': target,                         'Feature': var,                         'FeatureImportance_TrainModel': round(importance, 4),                         'Train_R2': round(r2_train, 4),                         'Train_RMSE': round(rmse_train, 4),                         'Test_R2': round(r2_test, 4),                         'Test_RMSE': round(rmse_test, 4),                         **search.best_params_                     })                     r2_comparison.append({                         'GridSize': grid_size,                         'Target': target,                         'Train_R2': round(r2_train, 4),                         'Test_R2': round(r2_test, 4),                         'Train_RMSE': round(rmse_train, 4),                         'Test_RMSE': round(rmse_test, 4)                     })                  # PDP 提取（Top N 变量）                 sorted_idx = np.argsort(best_model.feature_importances_)[::-1]                 top_features = [explanatory_vars[i] for i in sorted_idx[:9]]                  for feature in top_features:                     # 1) 新建一个仅用来提取 PDP 数据的 fig/ax，然后马上关闭                     fig, ax = plt.subplots()                     disp = PartialDependenceDisplay.from_estimator(best_model, X, [feature], ax=ax) # 使用X数据                     x_vals = disp.lines_[0][0].get_xdata()                     y_vals = disp.lines_[0][0].get_ydata()                     plt.close(fig)                     pdp_records.append({                         'Feature': feature,                         'GridSize': grid_size,                         'Target': target,                         'X': x_vals,                         'Y': y_vals                     })      # 保存模型训练后的结果     df_all = pd.DataFrame(all_results)     folder = os.path.join(grid_folder,r'Machine Learning')     os.makedirs(folder,exist_ok=True)     df_all.to_excel(os.path.join(folder, f'{year} GBDT_Random_Search_Results.xlsx'), index=False)     df_r2 = pd.DataFrame(r2_comparison)     df_r2 = df_r2.sort_values(['Target', 'GridSize'])     df_r2.to_excel(os.path.join(folder, f'{year} R2_Comparison_Train_vs_Test.xlsx'), index=False)     print("✅ R² train vs test comparison saved.")`
-        main hyperparameter and tuning parameters：    `# hyperparameter range     param_dist = {         'n_estimators': [4168], #4168         'learning_rate': loguniform(0.002, 0.355), #(0.002, 0.355)         'subsample': uniform(0.545, 0.413), # [0.545,0.958]         'max_depth' : randint(5, 14), # [5, 13]         'min_samples_split':[2], #2         'max_features': uniform(0.335, 0.581), #[0.335,0.916]         }     # train-test set split     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)     gbdt = GradientBoostingRegressor(random_state=0)     cv = RepeatedKFold(n_splits=5, n_repeats=20, random_state=0)     # random search cv     search = RandomizedSearchCV(         estimator=gbdt,         param_distributions=param_dist,         n_iter= 200,         scoring='r2',         cv=cv, # cross validation         verbose=2,         n_jobs=-1,         random_state=0     )     search.fit(X_train, y_train)     # pdp     disp = PartialDependenceDisplay.from_estimator(best_model, X, [feature], ax=ax) # 使用X数据`
-        
+codes
+
+      # 这个代码干的事情其实就是用梯度提升回归树 (GradientBoostingRegressor, GBDT) 对地理网格数据建模，并做特征重要性分析 + 偏依赖图 (PDP) 提取。
+    import geopandas as gpd
+    import pandas as pd
+    import numpy as np
+    import os
+    import re
+    import matplotlib.pyplot as plt
+    from sklearn.ensemble import GradientBoostingRegressor
+    from sklearn.metrics import r2_score, mean_squared_error
+    from sklearn.model_selection import RandomizedSearchCV
+    from sklearn.inspection import PartialDependenceDisplay
+    from sklearn.model_selection import train_test_split
+    from sklearn.model_selection import RepeatedKFold
+    from scipy.stats import randint, uniform, loguniform
+
+    # 文件夹路径
+    grid_folder = r'D:\seoul\grids\lst_map\final_clean\480_based'
+    def run_gbdt(grid_folder, years=[2016, 2023], n=0):
+        for year in years:
+            target_vars = [f'nor_{year}', f'ext_{year}', f'hr_{year}']
+            explanatory_vars = ['BCR', 'BHV',  'SVF', 'NDVI', 'EV', 'WR', 'Dist_W', 'Dist_P', 'Dist_M','X','Y'] # 顺序很讲究
+            # 保存结果
+            all_results = []
+            pdp_records = []
+            r2_comparison = []
+
+            param_dist = {
+                'n_estimators': [4168], #4168
+                'learning_rate': loguniform(0.002, 0.355), #(0.002, 0.355)
+                'subsample': uniform(0.545, 0.413), # [0.545,0.958]
+                'max_depth' : randint(5, 14), # [5, 13]
+                'min_samples_split':[2], #2
+                'max_features': uniform(0.335, 0.581), #[0.335,0.916]
+                }
+
+            # === 主循环 ===
+            for filename in os.listdir(grid_folder):
+                if filename.endswith(f'city{year}_lst_ratio_grid_480m_bcr_bhv_ndvi_svf_ev_distbp_distmt_distwb_wr_xy.shp'):
+                    input_path = os.path.join(grid_folder, filename)
+                    match = re.search(r'(\d{3,5})m', filename)
+                    grid_size = match.group(1)
+
+                    gdf = gpd.read_file(input_path)
+                    gdf_clean = gdf.replace([np.inf, -np.inf], np.nan).dropna(subset=target_vars + explanatory_vars)
+
+                    for target in target_vars:
+                        X = gdf_clean[explanatory_vars]
+                        y = gdf_clean[target]
+
+                        #####################################################################
+                        # 用20个 random seeds
+                        np.random.seed(0)  # 固定种子以便复现
+                        random_seeds = np.random.choice(10000, size=20, replace=False)
+                        n = n
+                        #####################################################################
+                        for r in [random_seeds[n]]:
+
+                            # 数据划分
+                            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=r) # 切20次
+
+                            gbdt = GradientBoostingRegressor(random_state=0)
+                            
+                            cv = RepeatedKFold(n_splits=5, n_repeats=20, random_state=0)
+
+                            search = RandomizedSearchCV(
+                                estimator=gbdt,
+                                param_distributions=param_dist,
+                                n_iter= 200,
+                                scoring='r2',
+                                cv=cv, # cross validation
+                                verbose=3,
+                                n_jobs=-1,
+                                random_state=0
+                            )
+
+                            search.fit(X_train, y_train)
+                            folder = os.path.join(grid_folder, r'Machine Learning')
+                            os.makedirs(folder, exist_ok=True)
+
+                            # 先保存一份 checkpoint (CSV，追加方式)
+                            checkpoint_path = os.path.join(folder, f"{year}_{target}_seed{n}_checkpoint.csv")
+                            df_cv = pd.DataFrame(search.cv_results_)
+                            if not os.path.exists(checkpoint_path):
+                                df_cv.to_csv(checkpoint_path, index=False)
+                            else:
+                                df_cv.to_csv(checkpoint_path, mode='a', header=False, index=False)
+                            print(f"[SAVE] checkpoint -> {checkpoint_path}")
+
+                            # 再保存原本的 Excel（完整結果）
+                            cv_path = os.path.join(folder, f"{n}_{r}_GBDT_{target}_cv_results.xlsx")
+                            try:
+                                df_cv.to_excel(cv_path, index=False)
+                                print(f"[SAVE] CV results -> {cv_path}")
+                            except Exception as e:
+                                print(f"[ERROR] Save CV results failed: {cv_path} | {e}")
+                                raise
+
+                            # 使用测试集评估
+                            best_model = search.best_estimator_
+                            y_train_pred = best_model.predict(X_train)
+                            y_test_pred = best_model.predict(X_test)
+
+                            r2_train = best_model.score(X_train, y_train)
+                            r2_test = r2_score(y_test, y_test_pred)
+
+                            rmse_train = np.sqrt(mean_squared_error(y_train, y_train_pred))
+                            rmse_test = np.sqrt(mean_squared_error(y_test, y_test_pred))
+
+                            print(f" {filename} | {target} 最佳参数: {search.best_params_} | R²_train={r2_train:.3f} | R²_test={r2_test:.3f}")
+
+                            for var, importance in zip(explanatory_vars, best_model.feature_importances_):
+                                all_results.append({
+                                    'GridSize': grid_size,
+                                    'Target': target,
+                                    'Feature': var,
+                                    'Random seed':r,
+                                    'FeatureImportance_TrainModel': round(importance, 4),
+                                    'Train_R2': round(r2_train, 4),
+                                    'Train_RMSE': round(rmse_train, 4),
+                                    'Test_R2': round(r2_test, 4),
+                                    'Test_RMSE': round(rmse_test, 4),
+                                    **search.best_params_
+                                })
+                                r2_comparison.append({
+                                    'GridSize': grid_size,
+                                    'Target': target,
+                                    'Random seed':r,
+                                    'Train_R2': round(r2_train, 4),
+                                    'Test_R2': round(r2_test, 4),
+                                    'Train_RMSE': round(rmse_train, 4),
+                                    'Test_RMSE': round(rmse_test, 4)
+                                })
+                    
+
+                    # 保存模型训练后的结果
+                    df_all = pd.DataFrame(all_results)
+
+                    df_all.to_excel(os.path.join(folder, f'{year} GBDT_Random_Search_Results_{target}_{n}_{r}.xlsx'), index=False)
+                    df_r2 = pd.DataFrame(r2_comparison)
+                    df_r2 = df_r2.sort_values(['Target', 'GridSize'])
+                    df_r2.to_excel(os.path.join(folder, f'{year} R2_Comparison_Train_vs_Test_{target}_{n}_{r}.xlsx'), index=False)
+                    # print("✅ R² train vs test comparison saved.")
+
+    run_gbdt(grid_folder, years=[2016, 2023], n=10)
 
 ### 03 - cv result
 
-Year
-
-normal heat day
-
-extreme heat day
-
-heat resilience
-
-2016
-
-2023
+|Year|normal heat day|extreme heat day|heat resilience|
+|----|---------------|----------------|---------------|
+|2016|||
+|2023|||
 
 ### 04 - best hyperparameter
 
-GBDT random search result
-
-2016
-
-2023
+|    |GBDT random search result|
+|----|------------------------|
+|2016||
+|2023||
 
 ![](excel/GBDT R².png)
 
 ### 05 - predict result with SDEM
 
-predict
-
-![](fig/predict.jpg)
-
-PDP
-
-![](fig/PDP.jpg)
-
-const tocList = document.getElementById("toc-list"); document.querySelectorAll("h1,h2,h3,h4,h5").forEach((heading, index) => { const id = "heading-" + index; heading.id = id; const li = document.createElement("li"); // 根据 heading 层级设置缩进（越小层级越靠左） const level = parseInt(heading.tagName.substring(1)); // h1->1,h2->2... li.style.marginLeft = (level - 1) \* 20 + "px"; const a = document.createElement("a"); a.href = "#" + id; a.textContent = heading.textContent; li.appendChild(a); tocList.appendChild(li); });
+|predict|![](fig/predict.jpg)|
+|PDP    |![](fig/PDP.jpg)    |
