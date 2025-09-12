@@ -45,15 +45,24 @@ Lin Lili
 Final pairs : 20160924 vs 20160807  
 Final pairs : 20230616 vs 20230819
 
-2 - LST data and variables
+2 - Extreme heat days and normal heat days identification
+--------------------------
+|Extreme heat day|
+|----------------|
+|Extreme heat is defined as a period during which the apparent temperature exceeds 33°C for at least two consecutive days, or when rapid temperature increases or prolonged heatwaves are expected to result in significant or widespread harm, based on the Korea Meteorological Administration, KMA.|
+|Criteria are based on duration, intensity, and potential damage.|
+|https://www.kdca.go.kr/contents.es?mid=a20205050300|
+|**Summer identification**: in Korea, the summer begins in May and end in September. Therefore, when we think about the percentile of the apparent temperature, we need use the 5-9 as the data source.|
+
+
+3 - LST data and variables
 --------------------------
 
 ### 01 statistics of data based on Grid 120, 240, 480 m
 
-2016 (G = 120,240,480)
-
-2023 (G = 120,240,480)
-
+|2016 (G = 120,240,480)|2023 (G = 120,240,480)|
+|----------------------|----------------------|
+|                      |                      |
 ### 02 Comparison of LST data (original)
 
 | Year | Normal heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Extreme heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Heat Resilience (Valid Area Ratio)          |
@@ -68,6 +77,7 @@ Final pairs : 20230616 vs 20230819
 |------|-------------------------------------|-------------------------------------|-------------------------------|
 | 2016 | ![](fig/G480_nor2016.jpg)<br>20160924 | ![](fig/G480_ext2016.jpg)<br>20160807 | ![](fig/G480_hr2016.jpg)<br>2016 HR |
 | 2023 | ![](fig/G480_nor2023.jpg)<br>20230616 | ![](fig/G480_ext2023.jpg)<br>20230819 | ![](fig/G480_hr2023.jpg)<br>2023 HR |
+
 ### 04 Comparison of Features data (2016,2023)
 
 | Features| 2016                            | 2023                            |
@@ -91,9 +101,10 @@ Final pairs : 20230616 vs 20230819
 |------|--------------------------------|---------------------------------|-------------------------------|
 | 2016 | ![](fig/2016_pearson_corr.png) | ![](fig/2016_spearman_corr.png) | ![](excel/2016_VIF_score.png) |
 | 2023 | ![](fig/2023_pearson_corr.png) | ![](fig/2023_spearman_corr.png) | ![](excel/2023_VIF_score.png) |
+
 ### 00 error information
 
-|      | 2016          | 2023       |
+|      | 2016                                                      | 2023                              |
 |------|-----------------------------------------------------------|-----------------------------------|
 | unit | ![](fig/2016_isolated_grid.png) <br>1308, 1377, 1411, 1471, 1525, 1690 | ![](fig/2023_isolated_grid.png) <br>1392, 1571 |
 
@@ -162,8 +173,8 @@ explanatory\_vars =
 #### 01 Equation
 <!-- LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I) -->
 
-|model   |**partial SDM**|
-|--------|---------------------------------------------------------------------------------------------------------------------------------------------|
+|model   |**partial SDM**                                                                                                      |
+|--------|---------------------------------------------------------------------------------------------------------------------|
 |equation|$LST = \beta_0 + \rho W\ln(LST) + \beta_1 BCR + \beta_2 BHV + \beta_3 NDVI + \beta_4 SVF + \beta_5 EV + \beta_6 WR + \beta_7 DistWB + \beta_8 DistGL + \beta_9 DistMT + \theta_1 WBCR + \theta_2 WBHV + \theta_3 WNDVI + \theta_4 WSVF + \theta_5 WEV + \theta_6 WWR + \varepsilon,\ \varepsilon \sim N(0, \sigma^2 I)$|
 |result\_nor\_2016 | nor\_2016 = 23.2855 + 0.5826\*Wnor\_2016 + 0.0338\*BCR + 0.0128\*BHV + 10.9005\*SVF + -20.0875\*NDVI + -0.0123\*EV + -0.1102\*WR + -0.0086\*Dist\_W + -0.0056\*Dist\_P + -0.0228\*Dist\_M + -0.1100\*W\_BCR + -0.1021\*W\_BHV + -16.4776\*W\_SVF + 2.6954\*W\_NDVI + 0.0050\*W\_EV + 0.0332\*W\_WR + 0.5826\*W\_nor\_2016|
 |result\_ext\_2016 | ext\_2016 = 33.0126 + 0.5725\*Wext\_2016 + 0.0520\*BCR + 0.0118\*BHV + 12.5920\*SVF + -37.3964\*NDVI + -0.0154\*EV + -0.1850\*WR + -0.0849\*Dist\_W + -0.0030\*Dist\_P + -0.0828\*Dist\_M + -0.1396\*W\_BCR + -0.1200\*W\_BHV + -21.7296\*W\_SVF + 14.0294\*W\_NDVI + 0.0047\*W\_EV + 0.0758\*W\_WR + 0.5725\*W\_ext\_2016|
@@ -172,7 +183,7 @@ explanatory\_vars =
 |result\_ext\_2023 | ext\_2023 = 29.3256 + 0.7471\*Wext\_2023 + 0.0476\*BCR + 0.0144\*BHV + 12.4025\*SVF + -27.3378\*NDVI + -0.0127\*EV + -0.1678\*WR + -0.0464\*Dist\_W + -0.0227\*Dist\_P + -0.0636\*Dist\_M + -0.1205\*W\_BCR + -0.1437\*W\_BHV + -28.2722\*W\_SVF + 18.7731\*W\_NDVI + 0.0013\*W\_EV + 0.1100\*W\_WR + 0.7471\*W\_ext\_2023|
 |result\_hr\_2023 | hr\_2023 = -1.1990 + 0.9467\*Whr\_2023 + 0.0010\*BCR + 0.0047\*BHV + -0.7294\*SVF + 1.4199\*NDVI + -0.0001\*EV + 0.0003\*WR + -0.0084\*Dist\_W + -0.0002\*Dist\_P + 0.0124\*Dist\_M + 0.0002\*W\_BCR + 0.0001\*W\_BHV + 1.7678\*W\_SVF + -1.4593\*W\_NDVI + 0.0003\*W\_EV + -0.0013\*W\_WR + 0.9467\*W\_hr\_2023|
 
-|model  |**partial SDEM**|
+|model  |**partial SDEM**                                                                                                    |
 |-------|--------------------------------------------------------------------------------------------------------------------|
 |equation|$LST = \beta\_0 + \beta\_1 BCR + \beta\_2 BHV + \beta\_3 NDVI + \beta\_4 SVF + \beta\_5 EV + \beta\_6 WR + \beta\_7 DistWB + \beta\_8 DistGL +\beta\_9 DistMT + \theta\_1 WBCR + \theta\_2 WBHV + \theta\_3 WNDVI + \theta\_4 WSVF + \theta\_5 WEV + \theta\_6 WWR + u, \quad u = \lambda W u +\varepsilon, \varepsilon \sim N(0, \sigma^2 I)$|
 |result\_nor\_2016| nor\_2016 = 27.5798 + 0.0203\*BCR + 0.0014\*BHV + 8.4274\*SVF + -21.4460\*NDVI + -0.0114\*EV + -0.1134\*WR + -0.0982\*Dist\_W + -0.0560\*Dist\_P + 0.0172\*Dist\_M + -0.0352\*W\_BCR + -0.0110\*W\_BHV + 3.3434\*W\_SVF + -10.5876\*W\_NDVI + 0.0039\*W\_EV + -0.0394\*W\_WR + 0.8184\*lambda|
@@ -182,31 +193,22 @@ explanatory\_vars =
 |result\_ext\_2023| ext\_2023 = 40.0883 + 0.0256\*BCR + 0.0006\*BHV + 8.3616\*SVF + -29.4204\*NDVI + -0.0114\*EV + -0.1725\*WR + -0.2396\*Dist\_W + -0.2239\*Dist\_P + -0.1696\*Dist\_M + 0.0193\*W\_BCR + 0.0377\*W\_BHV + 2.9527\*W\_SVF + -4.2769\*W\_NDVI + 0.0026\*W\_EV + -0.0304\*W\_WR + 0.9065\*lambda|
 |result\_hr\_2023| hr\_2023 = -2.5438 + 0.0004\*BCR + 0.0032\*BHV + -0.6424\*SVF + 1.6928\*NDVI + -0.0007\*EV + 0.0005\*WR + 0.0621\*Dist\_W + 0.1557\*Dist\_P + 0.1643\*Dist\_M + -0.0177\*W\_BCR + -0.0218\*W\_BHV + -1.7902\*W\_SVF + 0.7802\*W\_NDVI + -0.0038\*W\_EV + -0.0004\*W\_WR + 0.9537\*lambda|
 
-
-
 explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
 explanatory\_vars\_clean =\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\] 
 X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 
-
-
 #### 02 impact
 
-SDM
-
-SDEM
+|SDM                |  SDEM                   |
+|-------------------|-------------------------|
+|                   |                         |
 
 #### 03 model performance
 
-Year
-
-SDM
-
-SDEM
-
-2016
-
-2023
+|  Year    |   SDM       |   SDEM    |
+|----------|-------------|-----------|
+|  2016    |             |           |
+|  2023    |             |           |
 
 #### 04 model prediction
 
@@ -383,15 +385,15 @@ codes
 
 |Year|normal heat day|extreme heat day|heat resilience|
 |----|---------------|----------------|---------------|
-|2016|||
-|2023|||
+|2016|               |                |               |
+|2023|               |                |               |
 
 ### 04 - best hyperparameter
 
 |    |GBDT random search result|
-|----|------------------------|
-|2016||
-|2023||
+|----|-------------------------|
+|2016|                         |
+|2023|                         |
 
 ![](excel/GBDT R².png)
 
