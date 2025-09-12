@@ -160,7 +160,7 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 |                |                    |
 
 ### 05 AIC/BIC
-|  formula  
+|  formula                                                                                       |           AIC/BIC score                                       |
 |explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]|                                                               |
 |explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\]                                 |                                                               |
 
