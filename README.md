@@ -33,13 +33,10 @@ Lin Lili
 -----------------------------------------------
 
 首先选取气象站。最终我们只选了龙山气象站 ID = 108
-
-![20160924](excel/air station select.png)
+![20160924](excel/air_station_select.png)
 
 可以看到2023年的6.16不是典型 normal heat day，在图像中前2天下了暴雨。
-
 然而，由于所有有效数据都不太好↓
-
 ![其他天情况](excel/其他天情况.png) 
 ![其他天情况](excel/weather_condition_on_pairs.png) 
 Final pairs : 20160924 vs 20160807  
@@ -47,12 +44,18 @@ Final pairs : 20230616 vs 20230819
 
 2 - Extreme heat days and normal heat days identification
 --------------------------
-|Extreme heat day|
-|----------------|
+|Extreme heat day                                                                  |
+|----------------------------------------------------------------------------------|
 |Extreme heat is defined as a period during which the apparent temperature exceeds 33°C for at least two consecutive days, or when rapid temperature increases or prolonged heatwaves are expected to result in significant or widespread harm, based on the Korea Meteorological Administration, KMA.|
-|Criteria are based on duration, intensity, and potential damage.|
-|https://www.kdca.go.kr/contents.es?mid=a20205050300|
-|**Summer identification**: in Korea, the summer begins in May and end in September. Therefore, when we think about the percentile of the apparent temperature, we need use the 5-9 as the data source.|
+|Criteria are based on duration, intensity, and potential damage.                  |
+|definition links: https://www.kdca.go.kr/contents.es?mid=a20205050300 <br> https://data.kma.go.kr/climate/windChill/selectWindChillChart.do?pgmNo=111           |
+|**Summer identification**: in Korea, the summer begins in May and end in September. Therefore, when we think about the percentile of the apparent temperature, we need use the 5-9 as the data source.                                                    |
+|data source: https://data.kma.go.kr/climate/RankState/selectRankStatisticsDivisionList.do?pgmNo=179 |
+|Extreme heat day definition: Apparent Temperature (AT) at percentile over than 95% |
+|Regular heat day definition: Apparent Temperature (AT) at percentile 40 - 60 %     |
+
+
+
 
 
 3 - LST data and variables
@@ -166,7 +169,7 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 
 \--> it's clear that SDEM (SDM) has the best performance.
 
-### 06 final model select: partial SDEM ( partial SDM)
+### 06 final model select: partial SDEM (partial SDM)
 
 #### 01 Equation
 <!-- LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I) -->
@@ -181,15 +184,15 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 |result\_ext\_2023 | ext\_2023 = 29.3256 + 0.7471\*Wext\_2023 + 0.0476\*BCR + 0.0144\*BHV + 12.4025\*SVF + -27.3378\*NDVI + -0.0127\*EV + -0.1678\*WR + -0.0464\*Dist\_W + -0.0227\*Dist\_P + -0.0636\*Dist\_M + -0.1205\*W\_BCR + -0.1437\*W\_BHV + -28.2722\*W\_SVF + 18.7731\*W\_NDVI + 0.0013\*W\_EV + 0.1100\*W\_WR + 0.7471\*W\_ext\_2023|
 |result\_hr\_2023 | hr\_2023 = -1.1990 + 0.9467\*Whr\_2023 + 0.0010\*BCR + 0.0047\*BHV + -0.7294\*SVF + 1.4199\*NDVI + -0.0001\*EV + 0.0003\*WR + -0.0084\*Dist\_W + -0.0002\*Dist\_P + 0.0124\*Dist\_M + 0.0002\*W\_BCR + 0.0001\*W\_BHV + 1.7678\*W\_SVF + -1.4593\*W\_NDVI + 0.0003\*W\_EV + -0.0013\*W\_WR + 0.9467\*W\_hr\_2023|
 
-|model  |**partial SDEM**                                                                                                    |
-|-------|--------------------------------------------------------------------------------------------------------------------|
-|equation|$LST = \beta\_0 + \beta\_1 BCR + \beta\_2 BHV + \beta\_3 NDVI + \beta\_4 SVF + \beta\_5 EV + \beta\_6 WR + \beta\_7 DistWB + \beta\_8 DistGL +\beta\_9 DistMT + \theta\_1 WBCR + \theta\_2 WBHV + \theta\_3 WNDVI + \theta\_4 WSVF + \theta\_5 WEV + \theta\_6 WWR + u, \quad u = \lambda W u +\varepsilon, \varepsilon \sim N(0, \sigma^2 I)$|
+|  model          |**partial SDEM**                                                                                                         |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------|
+|equation         |$LST = \beta\_0 + \beta\_1 BCR + \beta\_2 BHV + \beta\_3 NDVI + \beta\_4 SVF + \beta\_5 EV + \beta\_6 WR + \beta\_7 DistWB + \beta\_8 DistGL +\beta\_9 DistMT + \theta\_1 WBCR + \theta\_2 WBHV + \theta\_3 WNDVI + \theta\_4 WSVF + \theta\_5 WEV + \theta\_6 WWR + u, \quad u = \lambda W u +\varepsilon, \varepsilon \sim N(0, \sigma^2 I)$|
 |result\_nor\_2016| nor\_2016 = 27.5798 + 0.0203\*BCR + 0.0014\*BHV + 8.4274\*SVF + -21.4460\*NDVI + -0.0114\*EV + -0.1134\*WR + -0.0982\*Dist\_W + -0.0560\*Dist\_P + 0.0172\*Dist\_M + -0.0352\*W\_BCR + -0.0110\*W\_BHV + 3.3434\*W\_SVF + -10.5876\*W\_NDVI + 0.0039\*W\_EV + -0.0394\*W\_WR + 0.8184\*lambda|
 |result\_ext\_2016| ext\_2016 = 39.3798 + 0.0326\*BCR + -0.0036\*BHV + 8.9039\*SVF + -38.8294\*NDVI + -0.0148\*EV + -0.1873\*WR + -0.2271\*Dist\_W + -0.0456\*Dist\_P + -0.1242\*Dist\_M + -0.0248\*W\_BCR + 0.0113\*W\_BHV + 4.9234\*W\_SVF + -9.7617\*W\_NDVI + 0.0050\*W\_EV + -0.0444\*W\_WR + 0.8400\*lambda|
-|result\_hr\_2016| hr\_2016 = -11.9287 + -0.0118\*BCR + 0.0056\*BHV + -0.3798\*SVF + 17.4904\*NDVI + 0.0033\*EV + 0.0735\*WR + 0.0882\*Dist\_W + -0.0281\*Dist\_P + 0.1634\*Dist\_M + -0.0085\*W\_BCR + -0.0200\*W\_BHV + -1.7936\*W\_SVF + 0.7076\*W\_NDVI + -0.0013\*W\_EV + 0.0096\*W\_WR + 0.9190\*lambda|
+|result\_hr\_2016 | hr\_2016 = -11.9287 + -0.0118\*BCR + 0.0056\*BHV + -0.3798\*SVF + 17.4904\*NDVI + 0.0033\*EV + 0.0735\*WR + 0.0882\*Dist\_W + -0.0281\*Dist\_P + 0.1634\*Dist\_M + -0.0085\*W\_BCR + -0.0200\*W\_BHV + -1.7936\*W\_SVF + 0.7076\*W\_NDVI + -0.0013\*W\_EV + 0.0096\*W\_WR + 0.9190\*lambda|
 |result\_nor\_2023| nor\_2023 = 37.4249 + 0.0267\*BCR + 0.0033\*BHV + 7.7807\*SVF + -27.5380\*NDVI + -0.0122\*EV + -0.1727\*WR + -0.2168\*Dist\_W + -0.0881\*Dist\_P + 0.0103\*Dist\_M + -0.0011\*W\_BCR + 0.0098\*W\_BHV + 0.9387\*W\_SVF + -2.9640\*W\_NDVI + -0.0021\*W\_EV + -0.0292\*W\_WR + 0.8250\*lambda|
 |result\_ext\_2023| ext\_2023 = 40.0883 + 0.0256\*BCR + 0.0006\*BHV + 8.3616\*SVF + -29.4204\*NDVI + -0.0114\*EV + -0.1725\*WR + -0.2396\*Dist\_W + -0.2239\*Dist\_P + -0.1696\*Dist\_M + 0.0193\*W\_BCR + 0.0377\*W\_BHV + 2.9527\*W\_SVF + -4.2769\*W\_NDVI + 0.0026\*W\_EV + -0.0304\*W\_WR + 0.9065\*lambda|
-|result\_hr\_2023| hr\_2023 = -2.5438 + 0.0004\*BCR + 0.0032\*BHV + -0.6424\*SVF + 1.6928\*NDVI + -0.0007\*EV + 0.0005\*WR + 0.0621\*Dist\_W + 0.1557\*Dist\_P + 0.1643\*Dist\_M + -0.0177\*W\_BCR + -0.0218\*W\_BHV + -1.7902\*W\_SVF + 0.7802\*W\_NDVI + -0.0038\*W\_EV + -0.0004\*W\_WR + 0.9537\*lambda|
+|result\_hr\_2023 | hr\_2023 = -2.5438 + 0.0004\*BCR + 0.0032\*BHV + -0.6424\*SVF + 1.6928\*NDVI + -0.0007\*EV + 0.0005\*WR + 0.0621\*Dist\_W + 0.1557\*Dist\_P + 0.1643\*Dist\_M + -0.0177\*W\_BCR + -0.0218\*W\_BHV + -1.7902\*W\_SVF + 0.7802\*W\_NDVI + -0.0038\*W\_EV + -0.0004\*W\_WR + 0.9537\*lambda|
 
 explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
 explanatory\_vars\_clean =\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\] 
