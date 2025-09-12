@@ -136,10 +136,10 @@ y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', '
 
 | Year | Type              | LM-Lag (lml) | p-value (lml) | LM-Error (lme) | p-value (lme) | Robust LM-Lag (rlml) | p-value (rlml) | Robust LM-Error (rlme) | p-value (rlme) |
 |------|-------------------|--------------|--------------|----------------|--------------|----------------------|----------------|------------------------|----------------|
-| 2016 | Normal heat day   | 211.3825     | 6.859e-48    | 1652.8657      | 0            | 16.2983              | 5.411e-05      | 1457.7815              | 0              |
-| 2016 | Extreme heat day  | 248.7858     | 4.777e-56    | 1839.4007      | 0            | 30.7201              | 2.981e-08      | 1621.3350              | 0              |
-| 2016 | Heat resilience   | 706.0370     | 1.455e-155   | 2894.3563      | 0            | 6.0687               | 0.01376        | 2194.3880              | 0              |
-| 2023 | Normal heat day   | 261.6000     | 7.687e-59    | 1403.3011      | 4.028e-307   | 22.6666              | 1.927e-06      | 1164.3677              | 3.383e-255     |
+| 2016 | Normal heat day  | 211.3825     | 6.859e-48    | 1652.8657      | 0            | 16.2983              | 5.411e-05      | 1457.7815              | 0              |
+| 2016 | Extreme heat day | 248.7858     | 4.777e-56    | 1839.4007      | 0            | 30.7201              | 2.981e-08      | 1621.3350              | 0              |
+| 2016 | Heat resilience  | 706.0370     | 1.455e-155   | 2894.3563      | 0            | 6.0687               | 0.01376        | 2194.3880              | 0              |
+| 2023 | Normal heat day  | 261.6000     | 7.687e-59    | 1403.3011      | 4.028e-307   | 22.6666              | 1.927e-06      | 1164.3677              | 3.383e-255     |
 | 2023 | Extreme heat day  | 641.0536     | 1.971e-141   | 2286.3265      | 0            | 52.8418              | 3.615e-13      | 1698.1147              | 0              |
 | 2023 | Heat resilience   | 3168.4077    | 0            | 3154.6372      | 0            | 80.0721              | 3.61e-19       | 66.3016                | 3.869e-16      |
 
@@ -154,17 +154,15 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 \# 5. SEM models\['SEM'\] = ML\_Error(yi, x, w=w, method="full", name\_w=w\_name,name\_ds=ds\_name)  
 \# 6. SDEM models\['SDEM'\] = ML\_Error(yi, x, w=w, slx\_lags=1, method="full", name\_w=w\_name, name\_ds=ds\_name)
 
-LR test score
 
-model performance
+|  LR test score |  model performance |
+|----------------|--------------------|
+|                |                    |
 
 ### 05 AIC/BIC
-
-explanatory\_vars =  
-\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
-
-explanatory\_vars =  
-\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\]
+|  formula  
+|explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]|                                                               |
+|explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\]                                 |                                                               |
 
 \--> it's clear that SDEM (SDM) has the best performance.
 
