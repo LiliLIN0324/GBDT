@@ -31,10 +31,8 @@ Lin Lili
 
 1 - Air condition and AT (apperant temperature)
 -----------------------------------------------
-
 首先选取气象站。最终我们只选了龙山气象站 ID = 108
 ![20160924](excel/air_station_select.png)
-
 可以看到2023年的6.16不是典型 normal heat day，在图像中前2天下了暴雨。
 然而，由于所有有效数据都不太好↓
 ![其他天情况](excel/其他天情况.png) 
@@ -55,17 +53,14 @@ Final pairs : 20230616 vs 20230819
 |Regular heat day definition: Apparent Temperature (AT) at percentile 40 - 60 %     |
 
 
-
-
-
 3 - LST data and variables
 --------------------------
 
 ### 01 statistics of data based on Grid 120, 240, 480 m
 
-|2016 (G = 120,240,480)|2023 (G = 120,240,480)|
-|----------------------|----------------------|
-|                      |                      |
+|2016 (G = 120,240,480)                        |2023 (G = 120,240,480)                        |
+|----------------------------------------------|----------------------------------------------|
+|[2016_Descriptive_statistics](excel/2016_Descriptive_statistics.xlsx)|[2023_Descriptive_statistics](excel/2023_Descriptive_statistics.xlsx)|
 ### 02 Comparison of LST data (original)
 
 | Year | Normal heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Extreme heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Heat Resilience (Valid Area Ratio)          |
@@ -160,7 +155,7 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 
 |  LR test score |  model performance |
 |----------------|--------------------|
-|                |                    |
+|[LR test score](excel/LR_test_results.xlsx)|excel的后一页|
 
 ### 05 AIC/BIC
 |  formula                                                                                       |           AIC/BIC score                                       |
