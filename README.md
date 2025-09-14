@@ -29,18 +29,8 @@ Lin Lili
 |-------------------------------|-------------------------------|
 |![G480_2016](fig/G480_2016.png)|![G480_2023](fig/G480_2023.png)|
 
-1 - Air condition and AT (apperant temperature)
------------------------------------------------
-首先选取气象站。最终我们只选了龙山气象站 ID = 108
-![20160924](excel/air_station_select.png)
-可以看到2023年的6.16不是典型 normal heat day，在图像中前2天下了暴雨。
-然而，由于所有有效数据都不太好↓
-![其他天情况](excel/其他天情况.png) 
-![其他天情况](excel/weather_condition_on_pairs.png) 
-Final pairs : 20160924 vs 20160807  
-Final pairs : 20230616 vs 20230819
 
-2 - Extreme heat days and normal heat days identification
+1 - Extreme heat days and normal heat days identification
 --------------------------
 |Extreme heat day                                                                  |
 |----------------------------------------------------------------------------------|
@@ -49,24 +39,99 @@ Final pairs : 20230616 vs 20230819
 |definition links: https://www.kdca.go.kr/contents.es?mid=a20205050300 <br> https://data.kma.go.kr/climate/windChill/selectWindChillChart.do?pgmNo=111           |
 |**Summer identification**: in Korea, the summer begins in May and end in September. Therefore, when we think about the percentile of the apparent temperature, we need use the 5-9 as the data source.                                                    |
 |data source: https://data.kma.go.kr/climate/RankState/selectRankStatisticsDivisionList.do?pgmNo=179 |
-|Extreme heat day definition: Apparent Temperature (AT) at percentile over than 95% |
-|Regular heat day definition: Apparent Temperature (AT) at percentile 40 - 60 %     |
+|Extreme heat day definition: Apparent Temperature (AT) at percentile over than 95%                  |
+|Regular heat day definition: Apparent Temperature (AT) at percentile 40 - 60 %                      |
+
+2 - Air condition and AT (apperant temperature)
+-----------------------------------------------
+首先选取气象站。最终我们只选了龙山气象站 ID = 108
+![20160924](excel/air_station_select.png)
+
+|air temperature data 2015_2024                |
+|----------------------------------------------|
+|[AT_2015_2024](original_data/AT_2015_2024.csv)|
+
+可以看到2023年的6.16不是典型 normal heat day，在图像中前2天下了暴雨。
+然而，由于所有有效数据都不太好↓<br>
+![其他天情况](excel/其他天情况.png) 
+![其他天情况](excel/weather_condition_on_pairs.png) 
+[weather source](orignal_data/weather.xlsx)
+
+**Final pairs : 20160924 vs 20160807**
+**Final pairs : 20230616 vs 20230819**
+
+3 - LST data and variables (original)
+-----------------------------------------------
+
+|After I get the apparent temperature>33℃ and percentile>95%, <br>
+I download [data](original_data/landsat_ot_c2_l2.csv) from Landsat Collection 2 Level-2 8/9 |
+|links:https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-temperature       |
+|To properly interpret Landsat Collection 2 Surface Temperature (ST) data, <br>
+users must apply a scaling factor to convert digital numbers (DN) to temperature values in Kelvin.  <br>
+For Landsat Collection 2 Level-2 Surface Temperature products, the following equation is used: <br>
+ST = (DN * 0.00341802) + 149.0                                                              |
+
+### 01 Original source of LST data
+| Year | Normal heat day (Fig, Date)                           | Extreme heat day (Fig, Date)                 | Heat Resilience (Fig, Date)      |
+|------|-------------------------------------------------------|----------------------------------------------|----------------------------------|
+| 2016 |[clipped_20160924_B10_cleaned_LST.tif](original_data/LST/clipped_20160924_B10_cleaned_LST.tif), 99.46%|[clipped_20160807_B10_cleaned_LST.tif](original_data/LST/clipped_20160807_B10_cleaned_LST.tif), 82.53% |[2016_heat_resilience.tif](original_data/LST/2016_heat_resilience.tif), 82.10% |
+| 2023 |[clipped_20230616_B10_cleaned_LST.tif](original_data/LST/clipped_20230616_B10_cleaned_LST.tif), 99.00%|[clipped_20230819_B10_cleaned_LST.tif](original_data/LST/clipped_20230819_B10_cleaned_LST.tif), 72.66% |[2023_heat_resilience.tif](original_data/LST/2023_heat_resilience.tif), 72.25% |
 
 
-3 - LST data and variables
+### 02 Original source of Features data
+
+
+|building |
+|---------|
+|*01* links: https://map.ngii.go.kr/ms/map/NlipMap.do
+![original_building](original_data/features/building/building_01.png)|
+|*02* The original shapefile contained visible seams, which I have now merged into a single unified file. ↓
+![merge_building](original_data/features/building/building_02.png)<br>
+[fin_building_height.shp](original_data/features/building/Fin_building_height) <-- This data is probably the best one you can use.<br>
+['무벽건물' '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트' '가건물' '온실']|
+
+
+[fin.shp](original_data/features/building/final)                              |
+
+
+| BHV     |building shpfile with height|||
+| SVF     |building shpfile with height|||
+| NDVI    |landsat 8 Band 4 & Band 5   |||
+| EV      |                            |||
+| WR      |waterbodies file            |||
+| Dist_P  |parks file                  |||
+| Dist_M  |mountain file               |||
+| Dist_W  |waterbodies file            |||
+
+
+| Category |Indicator|Unit| Formula                                                 | Data by grids|
+|----------|---------|----|---------------------------------------------------------|--------------|
+|  01      | BCR     |%   |BCR = Built-up Area / Total Land Area                    |
+|  01      | BHV     |m   |BHV = SD(Building Heights within unit)                   |
+|  01      | SVF     |N/A |SVF = Visible Sky Hemisphere Area / Total Hemisphere Area|
+|  02      | NDVI    |N/A |NDVI = (NIR - Red) / (NIR + Red)                         |
+|  02      | EV      |m   |Elevation(x,y)=DEM(x,y)                                  |
+|  02      | WR      |%   |WR = Water Surface Area / Total Unit Area                |
+|  03      | Dist_P  |km  |Euclidean_Distance(*Centroid*, Nearest Park)             |
+|  03      | Dist_M  |km  |Euclidean_Distance(*Centroid*, Nearest Mountain)         |
+|  03      | Dist_W  |km  |Euclidean_Distance(*Centroid*, Nearest Waterbody)        |
+
+
+4 - LST data and variables (based on grid)
 --------------------------
 
 ### 01 statistics of data based on Grid 120, 240, 480 m
 
-|2016 (G = 120,240,480)                        |2023 (G = 120,240,480)                        |
-|----------------------------------------------|----------------------------------------------|
+|2016 (G = 120,240,480)                                            |2023 (G = 120,240,480)                                            |
+|------------------------------------------------------------------|------------------------------------------------------------------|
 |[2016_Descriptive_statistics](csv/2016_Descriptive_statistics.csv)|[2023_Descriptive_statistics](csv/2023_Descriptive_statistics.csv)|
+
 ### 02 Comparison of LST data (original)
 
-| Year | Normal heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Extreme heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Heat Resilience (Valid Area Ratio)          |
-|------|--------------------------------------------------------------------|---------------------------------------------------------------------|-----------------------------------------|
-| 2016 | ![](fig/20160924.jpg) 27.7, 47.51, 99.46%, 11:11:17 | ![](fig/20160807.jpg) 34.3, 97.47, 82.53%, 11:11:04               | ![](fig/2016_HR.jpg) 82.10%            |
-| 2023 | ![](fig/20230616.jpg) 28.4, 53.95, 99.00%, 11:10:22  |  ![](fig/20230819.jpg) 33.7, 95.68, 72.66%, 11:10:50                | ![](fig/2023_HR.jpg)  72.25%           |
+|Year|Normal heat day(AT,Percentile,LOCAL_TIME)       |Extreme heat day(AT,Percentile,LOCAL_TIME)       |Heat Resilience            |
+|----|------------------------------------------------|-------------------------------------------------|---------------------------|
+|2016|![](fig/20160924.jpg) 27.7℃, 47.51, 11:11:17   |![](fig/20160807.jpg) 34.3℃, 97.47, 11:11:04    |![](fig/2016_HR.jpg)       |
+|2023|![](fig/20230616.jpg) 28.4℃, 53.95, 11:10:22   |![](fig/20230819.jpg) 33.7℃, 95.68, 11:10:50    |![](fig/2023_HR.jpg)       |
 
 
 ### 03 Comparison of LST data based on Grid 480m(2016, 2023)
@@ -84,55 +149,28 @@ Final pairs : 20230616 vs 20230819
 | 2023 | ![](fig/2023_pearson_corr.png) | ![](fig/2023_spearman_corr.png) | ![](excel/2023_VIF_score.png) |
 
 ->> Based on Spearman correlation, we clean the BHA.
-### 05 Original source of Features data
 
-| Category |Indicator|original data               | Original Data file (type)  | Data source                | Data by grids|
-|----------|---------|----------------------------|----------------------------|----------------------------|--------------|
-|  01      | BCR     |building shpfile with height|||
-|  01      | BHV     |building shpfile with height|||
-|  01      | SVF     |building shpfile with height|||
-|  02      | NDVI    |landsat 8 Band 4 & Band 5   |||
-|  02      | EV      |                            |||
-|  02      | WR      |waterbodies file            |||
-|  03      | Dist_P  |parks file                  |||
-|  03      | Dist_M  |mountain file               |||
-|  03      | Dist_W  |waterbodies file            |||
+### 05 Comparison of Features data (2016,2023)
 
+| Features| 2016                       | 2023                            |
+|---------|----------------------------|---------------------------------|
+| BCR     | ![](fig/G480_V_BCR.jpg)    | ![](fig/G480_V_BCR_2023.jpg)    |
+| BHV     | ![](fig/G480_V_BHV.jpg)    | ![](fig/G480_V_BHV_2023.jpg)    |
+| SVF     | ![](fig/G480_V_SVF.jpg)    | ![](fig/G480_V_SVF_2023.jpg)    |
+| NDVI    | ![](fig/G480_V_NDVI.jpg)   | ![](fig/G480_V_NDVI_2023.jpg)   |
+| EV      | ![](fig/G480_V_EV.jpg)     | ![](fig/G480_V_EV_2023.jpg)     |
+| WR      | ![](fig/G480_V_WR.jpg)     | ![](fig/G480_V_WR_2023.jpg)     |
+| Dist_P  | ![](fig/G480_V_DistP.jpg)  | ![](fig/G480_V_DistP_2023.jpg)  |
+| Dist_M  | ![](fig/G480_V_DistM.jpg)  | ![](fig/G480_V_DistM_2023.jpg)  |
+| Dist_W  | ![](fig/G480_V_DistW.jpg)  | ![](fig/G480_V_DistW_2023.jpg)  |
 
-| Category |Indicator|Unit| Formula                                                 |
-|----------|---------|----|---------------------------------------------------------|
-|  01      | BCR     |%   |BCR = Built-up Area / Total Land Area                    |
-|  01      | BHV     |m   |BHV = SD(Building Heights within unit)                   |
-|  01      | SVF     |N/A |SVF = Visible Sky Hemisphere Area / Total Hemisphere Area|
-|  02      | NDVI    |N/A |NDVI = (NIR - Red) / (NIR + Red)                         |
-|  02      | EV      |m   |Elevation(x,y)=DEM(x,y)                                  |
-|  02      | WR      |%   |WR = Water Surface Area / Total Unit Area                |
-|  03      | Dist_P  |km  |Euclidean_Distance(*Centroid*, Nearest Park)             |
-|  03      | Dist_M  |km  |Euclidean_Distance(*Centroid*, Nearest Mountain)         |
-|  03      | Dist_W  |km  |Euclidean_Distance(*Centroid*, Nearest Waterbody)        |
-
-### 06 Comparison of Features data (2016,2023)
-
-| Features| 2016                            | 2023                            |
-|---------|---------------------------------|---------------------------------|
-| BCR     | ![](fig/G480_V_BCR.jpg)         | ![](fig/G480_V_BCR_2023.jpg)    |
-| BHV     | ![](fig/G480_V_BHV.jpg)         | ![](fig/G480_V_BHV_2023.jpg)    |
-| SVF     | ![](fig/G480_V_SVF.jpg)         | ![](fig/G480_V_SVF_2023.jpg)    |
-| NDVI    | ![](fig/G480_V_NDVI.jpg)        | ![](fig/G480_V_NDVI_2023.jpg)   |
-| EV      | ![](fig/G480_V_EV.jpg)          | ![](fig/G480_V_EV_2023.jpg)     |
-| WR      | ![](fig/G480_V_WR.jpg)          | ![](fig/G480_V_WR_2023.jpg)     |
-| Dist_P  | ![](fig/G480_V_DistP.jpg)       | ![](fig/G480_V_DistP_2023.jpg)  |
-| Dist_M  | ![](fig/G480_V_DistM.jpg)       | ![](fig/G480_V_DistM_2023.jpg)  |
-| Dist_W  | ![](fig/G480_V_DistW.jpg)       | ![](fig/G480_V_DistW_2023.jpg)  |
-
-3 - spatial regression model result
+5 - spatial regression model result
 -----------------------------------
-
 
 ### 00 error information
 
-|      | 2016                                                      | 2023                              |
-|------|-----------------------------------------------------------|-----------------------------------|
+|      | 2016                                                                   | 2023                                           |
+|------|------------------------------------------------------------------------|------------------------------------------------|
 | unit | ![](fig/2016_isolated_grid.png) <br>1308, 1377, 1411, 1471, 1525, 1690 | ![](fig/2023_isolated_grid.png) <br>1392, 1571 |
 
 ### 01 OLS
