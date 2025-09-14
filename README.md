@@ -60,7 +60,7 @@ Final pairs : 20230616 vs 20230819
 
 |2016 (G = 120,240,480)                        |2023 (G = 120,240,480)                        |
 |----------------------------------------------|----------------------------------------------|
-|[2016_Descriptive_statistics](excel/2016_Descriptive_statistics.xlsx)|[2023_Descriptive_statistics](excel/2023_Descriptive_statistics.xlsx)|
+|[2016_Descriptive_statistics](csv/2016_Descriptive_statistics.csv)|[2023_Descriptive_statistics](csv/2023_Descriptive_statistics.csv)|
 ### 02 Comparison of LST data (original)
 
 | Year | Normal heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Extreme heat day (AT, Percentile, Non Cloud Ratio, LOCAL_TIME) | Heat Resilience (Valid Area Ratio)          |
@@ -71,12 +71,46 @@ Final pairs : 20230616 vs 20230819
 
 ### 03 Comparison of LST data based on Grid 480m(2016, 2023)
 
-| Year | Normal heat day (Fig, Date)         | Extreme heat day (Fig, Date)        | Heat Resilience (Fig, Date)   |
-|------|-------------------------------------|-------------------------------------|-------------------------------|
+| Year | Normal heat day (Fig, Date)           | Extreme heat day (Fig, Date)          | Heat Resilience (Fig, Date)         |
+|------|---------------------------------------|---------------------------------------|-------------------------------------|
 | 2016 | ![](fig/G480_nor2016.jpg)<br>20160924 | ![](fig/G480_ext2016.jpg)<br>20160807 | ![](fig/G480_hr2016.jpg)<br>2016 HR |
 | 2023 | ![](fig/G480_nor2023.jpg)<br>20230616 | ![](fig/G480_ext2023.jpg)<br>20230819 | ![](fig/G480_hr2023.jpg)<br>2023 HR |
 
-### 04 Comparison of Features data (2016,2023)
+
+### 04 Features correlation test
+| Year | Pearson correlation            | Spearman correlation            | VIF score                     |
+|------|--------------------------------|---------------------------------|-------------------------------|
+| 2016 | ![](fig/2016_pearson_corr.png) | ![](fig/2016_spearman_corr.png) | ![](excel/2016_VIF_score.png) |
+| 2023 | ![](fig/2023_pearson_corr.png) | ![](fig/2023_spearman_corr.png) | ![](excel/2023_VIF_score.png) |
+->> Based on Spearman correlation, we clean the BHA.
+### 05 Original source of Features data
+
+| Category |Indicator|original data               | Original Data file (type)  | Data source                | Data by grids|
+|----------|---------|----------------------------|----------------------------|----------------------------|--------------|
+|  01      | BCR     |building shpfile with height|||
+|  01      | BHV     |building shpfile with height|||
+|  01      | SVF     |building shpfile with height|||
+|  02      | NDVI    |landsat 8 Band 4 & Band 5   |||
+|  02      | EV      |                            |||
+|  02      | WR      |waterbodies file            |||
+|  03      | Dist_P  |parks file                  |||
+|  03      | Dist_M  |mountain file               |||
+|  03      | Dist_W  |waterbodies file            |||
+
+
+| Category |Indicator|Unit| Formula                                                 |
+|----------|---------|----|---------------------------------------------------------|
+|  01      | BCR     |%   |BCR = Built-up Area / Total Land Area                    |
+|  01      | BHV     |m   |BHV = SD(Building Heights within unit)                   |
+|  01      | SVF     |N/A |SVF = Visible Sky Hemisphere Area / Total Hemisphere Area|
+|  02      | NDVI    |N/A |NDVI = (NIR - Red) / (NIR + Red)                         |
+|  02      | EV      |m   |Elevation(x,y)=DEM(x,y)                                  |
+|  02      | WR      |%   |WR = Water Surface Area / Total Unit Area                |
+|  03      | Dist_P  |km  |Euclidean_Distance(*Centroid*, Nearest Park)             |
+|  03      | Dist_M  |km  |Euclidean_Distance(*Centroid*, Nearest Mountain)         |
+|  03      | Dist_W  |km  |Euclidean_Distance(*Centroid*, Nearest Waterbody)        |
+
+### 06 Comparison of Features data (2016,2023)
 
 | Features| 2016                            | 2023                            |
 |---------|---------------------------------|---------------------------------|
@@ -93,12 +127,6 @@ Final pairs : 20230616 vs 20230819
 3 - spatial regression model result
 -----------------------------------
 
-### 00 correlation test
-
-| Year | Pearson correlation            | Spearman correlation            | VIF score                     |
-|------|--------------------------------|---------------------------------|-------------------------------|
-| 2016 | ![](fig/2016_pearson_corr.png) | ![](fig/2016_spearman_corr.png) | ![](excel/2016_VIF_score.png) |
-| 2023 | ![](fig/2023_pearson_corr.png) | ![](fig/2023_spearman_corr.png) | ![](excel/2023_VIF_score.png) |
 
 ### 00 error information
 
@@ -153,14 +181,18 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 \# 6. SDEM models\['SDEM'\] = ML\_Error(yi, x, w=w, slx\_lags=1, method="full", name\_w=w\_name, name\_ds=ds\_name)
 
 
-|  LR test score |  model performance |
-|----------------|--------------------|
-|[LR test score](excel/LR_test_results.xlsx)|excel的后一页|
+|  LR test score                         |  model performance                                   |
+|----------------------------------------|------------------------------------------------------|
+|[LR test score](csv/LR_test_results.csv)|[model performance](csv/LR_test_results_Model_info.csv)|
 
 ### 05 AIC/BIC
-|  formula                                                                                       |           AIC/BIC score                                       |
-|explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]|                                                               |
-|explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\]                                 |                                                               |
+
+|  formula       |explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]| 
+|----------------|------------------------------------------------------------------------------------------------|
+| AIC/BIC score  |[AIC score](csv/SLX_SEM_SLM_SDM_SDEM_AIC_BIC.csv)                                               |
+|  formula       |explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\]                                 |
+|----------------|------------------------------------------------------------------------------------------------|
+| AIC/BIC score  |[part AIC score](csv/part_SLX_SEM_SLM_SDM_SDEM_AIC_BIC.csv)                                     |
 
 \--> it's clear that SDEM (SDM) has the best performance.
 
@@ -179,8 +211,8 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 |result\_ext\_2023 | ext\_2023 = 29.3256 + 0.7471\*Wext\_2023 + 0.0476\*BCR + 0.0144\*BHV + 12.4025\*SVF + -27.3378\*NDVI + -0.0127\*EV + -0.1678\*WR + -0.0464\*Dist\_W + -0.0227\*Dist\_P + -0.0636\*Dist\_M + -0.1205\*W\_BCR + -0.1437\*W\_BHV + -28.2722\*W\_SVF + 18.7731\*W\_NDVI + 0.0013\*W\_EV + 0.1100\*W\_WR + 0.7471\*W\_ext\_2023|
 |result\_hr\_2023 | hr\_2023 = -1.1990 + 0.9467\*Whr\_2023 + 0.0010\*BCR + 0.0047\*BHV + -0.7294\*SVF + 1.4199\*NDVI + -0.0001\*EV + 0.0003\*WR + -0.0084\*Dist\_W + -0.0002\*Dist\_P + 0.0124\*Dist\_M + 0.0002\*W\_BCR + 0.0001\*W\_BHV + 1.7678\*W\_SVF + -1.4593\*W\_NDVI + 0.0003\*W\_EV + -0.0013\*W\_WR + 0.9467\*W\_hr\_2023|
 
-|  model          |**partial SDEM**                                                                                                         |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------|
+|  model          |**partial SDEM**|
+|-----------------|-----------------------------------------------------------------------------------------------|
 |equation         |$LST = \beta\_0 + \beta\_1 BCR + \beta\_2 BHV + \beta\_3 NDVI + \beta\_4 SVF + \beta\_5 EV + \beta\_6 WR + \beta\_7 DistWB + \beta\_8 DistGL +\beta\_9 DistMT + \theta\_1 WBCR + \theta\_2 WBHV + \theta\_3 WNDVI + \theta\_4 WSVF + \theta\_5 WEV + \theta\_6 WWR + u, \quad u = \lambda W u +\varepsilon, \varepsilon \sim N(0, \sigma^2 I)$|
 |result\_nor\_2016| nor\_2016 = 27.5798 + 0.0203\*BCR + 0.0014\*BHV + 8.4274\*SVF + -21.4460\*NDVI + -0.0114\*EV + -0.1134\*WR + -0.0982\*Dist\_W + -0.0560\*Dist\_P + 0.0172\*Dist\_M + -0.0352\*W\_BCR + -0.0110\*W\_BHV + 3.3434\*W\_SVF + -10.5876\*W\_NDVI + 0.0039\*W\_EV + -0.0394\*W\_WR + 0.8184\*lambda|
 |result\_ext\_2016| ext\_2016 = 39.3798 + 0.0326\*BCR + -0.0036\*BHV + 8.9039\*SVF + -38.8294\*NDVI + -0.0148\*EV + -0.1873\*WR + -0.2271\*Dist\_W + -0.0456\*Dist\_P + -0.1242\*Dist\_M + -0.0248\*W\_BCR + 0.0113\*W\_BHV + 4.9234\*W\_SVF + -9.7617\*W\_NDVI + 0.0050\*W\_EV + -0.0444\*W\_WR + 0.8400\*lambda|
@@ -195,16 +227,16 @@ X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 
 #### 02 impact
 
-|SDM                |  SDEM                   |
-|-------------------|-------------------------|
-|                   |                         |
+|SDM                               |  SDEM                              |
+|----------------------------------|------------------------------------|
+|[SDM_effects](csv/SDM_effects.csv)|[SDEM_effects](csv/SDEM_effects.csv)|
 
 #### 03 model performance
 
-|  Year    |   SDM       |   SDEM    |
-|----------|-------------|-----------|
-|  2016    |             |           |
-|  2023    |             |           |
+|  Year    |   SDM                      |   SDEM    |
+|----------|----------------------------|-----------|
+|  2016    |[2016 SDM](csv/2016_SDM.csv)|[2016 SDEM](csv/2016_SDEM.csv)|
+|  2023    |[2023 SDM](csv/2023_SDM.csv)|[2023 SDEM](csv/2023_SDEM.csv)|
 
 #### 04 model prediction
 
@@ -378,6 +410,13 @@ codes
     run_gbdt(grid_folder, years=[2016, 2023], n=10)
 
 ### 03 - cv result
+|Workflow                                              |
+|First: we use 20 random seeds to calculate the result.|
+|Second: for each seeds, split the data into 80-20 train-test sets|
+|using K-folder cross validation. split into 5 set, and 20 repeated, randsom seed = 0|
+|using the GBDT with the spercific hyperparameters. and for n_iterration = 200, using random search to find out the best hyperparameters.|
+
+-> when I got the 200 itteration CV result. in 
 
 |Year|normal heat day|extreme heat day|heat resilience|
 |----|---------------|----------------|---------------|
