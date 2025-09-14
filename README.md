@@ -80,17 +80,18 @@ ST = (DN * 0.00341802) + 149.0                                                  
 
 ### 02 Original source of Features data
 
-
-|building |
-|---------|
+#### A_building
+| A_building|
+|-----------|
 |*01* links: https://map.ngii.go.kr/ms/map/NlipMap.do
 ![original_building](original_data/features/building/building_01.png)|
 |*02* The original shapefile contained visible seams, which I have now merged into a single unified file. ↓
 ![merge_building](original_data/features/building/building_02.png)<br>
-[fin_building_height.shp](original_data/features/building/Fin_building_height) <-- This data is probably the best one you can use.<br>
-['무벽건물' '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트' '가건물' '온실']|
-
-
+[fin_building_height.shp](original_data/features/building/Fin_building_height) <-- This data is probably the best one you can use.<br>|
+|*03* data cleaning ↓ <br>
+a -> filtered_data = data[data['area'] >= 5]<br>
+b -> ['무벽건물' '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트' '가건물' '온실']<br>
+  -->[          '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트'         '온실']<br>
 [fin.shp](original_data/features/building/final)                              |
 
 
