@@ -82,6 +82,7 @@ Final pairs : 20230616 vs 20230819
 |------|--------------------------------|---------------------------------|-------------------------------|
 | 2016 | ![](fig/2016_pearson_corr.png) | ![](fig/2016_spearman_corr.png) | ![](excel/2016_VIF_score.png) |
 | 2023 | ![](fig/2023_pearson_corr.png) | ![](fig/2023_spearman_corr.png) | ![](excel/2023_VIF_score.png) |
+
 ->> Based on Spearman correlation, we clean the BHA.
 ### 05 Original source of Features data
 
@@ -187,9 +188,11 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 
 ### 05 AIC/BIC
 
+Comparison between 9 variables and 6 variables
 |  formula       |explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]| 
 |----------------|------------------------------------------------------------------------------------------------|
 | AIC/BIC score  |[AIC score](csv/SLX_SEM_SLM_SDM_SDEM_AIC_BIC.csv)                                               |
+
 |  formula       |explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\]                                 |
 |----------------|------------------------------------------------------------------------------------------------|
 | AIC/BIC score  |[part AIC score](csv/part_SLX_SEM_SLM_SDM_SDEM_AIC_BIC.csv)                                     |
@@ -197,6 +200,9 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 \--> it's clear that SDEM (SDM) has the best performance.
 
 ### 06 final model select: partial SDEM (partial SDM)
+explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
+explanatory\_vars\_clean =\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\] 
+X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 
 #### 01 Equation
 <!-- LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I) -->
@@ -220,10 +226,6 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 |result\_nor\_2023| nor\_2023 = 37.4249 + 0.0267\*BCR + 0.0033\*BHV + 7.7807\*SVF + -27.5380\*NDVI + -0.0122\*EV + -0.1727\*WR + -0.2168\*Dist\_W + -0.0881\*Dist\_P + 0.0103\*Dist\_M + -0.0011\*W\_BCR + 0.0098\*W\_BHV + 0.9387\*W\_SVF + -2.9640\*W\_NDVI + -0.0021\*W\_EV + -0.0292\*W\_WR + 0.8250\*lambda|
 |result\_ext\_2023| ext\_2023 = 40.0883 + 0.0256\*BCR + 0.0006\*BHV + 8.3616\*SVF + -29.4204\*NDVI + -0.0114\*EV + -0.1725\*WR + -0.2396\*Dist\_W + -0.2239\*Dist\_P + -0.1696\*Dist\_M + 0.0193\*W\_BCR + 0.0377\*W\_BHV + 2.9527\*W\_SVF + -4.2769\*W\_NDVI + 0.0026\*W\_EV + -0.0304\*W\_WR + 0.9065\*lambda|
 |result\_hr\_2023 | hr\_2023 = -2.5438 + 0.0004\*BCR + 0.0032\*BHV + -0.6424\*SVF + 1.6928\*NDVI + -0.0007\*EV + 0.0005\*WR + 0.0621\*Dist\_W + 0.1557\*Dist\_P + 0.1643\*Dist\_M + -0.0177\*W\_BCR + -0.0218\*W\_BHV + -1.7902\*W\_SVF + 0.7802\*W\_NDVI + -0.0038\*W\_EV + -0.0004\*W\_WR + 0.9537\*lambda|
-
-explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
-explanatory\_vars\_clean =\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\] 
-X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 
 #### 02 impact
 
@@ -401,10 +403,10 @@ codes
                     # 保存模型训练后的结果
                     df_all = pd.DataFrame(all_results)
 
-                    df_all.to_excel(os.path.join(folder, f'{year} GBDT_Random_Search_Results_{target}_{n}_{r}.xlsx'), index=False)
+                    df_all.to_excel(os.path.join(folder, f'{year} GBDT_Random_Search_Results_{n}_{r}.xlsx'), index=False)
                     df_r2 = pd.DataFrame(r2_comparison)
                     df_r2 = df_r2.sort_values(['Target', 'GridSize'])
-                    df_r2.to_excel(os.path.join(folder, f'{year} R2_Comparison_Train_vs_Test_{target}_{n}_{r}.xlsx'), index=False)
+                    df_r2.to_excel(os.path.join(folder, f'{year} R2_Comparison_Train_vs_Test_{n}_{r}.xlsx'), index=False)
                     # print("✅ R² train vs test comparison saved.")
 
     run_gbdt(grid_folder, years=[2016, 2023], n=10)
