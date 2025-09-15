@@ -19,6 +19,7 @@ Lin Lili
 |-----------------------------------------|-------------------------------------------------------------|
 | ![grid_original](fig/grid_original.jpg) | ![grid_original_satellite](fig/grid_original_satellite.jpg) |
 
+
 #### grid valid information
 
 这里展示了我的数据选择过程，随着有效值需求的拔高，以及120和240m grid需要和480m完全对齐，我们最终得到的有效值一览表
