@@ -90,9 +90,40 @@ ST = (DN * 0.00341802) + 149.0                                                  
 [fin_building_height.shp](original_data/features/building/Fin_building_height) <-- This data is probably the best one you can use.<br>|
 |*03* data cleaning ↓ <br>
 a -> filtered_data = data[data['area'] >= 5]<br>
-b -> ['무벽건물' '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트' '가건물' '온실']<br>
-  -->[          '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트'         '온실']<br>
-[fin.shp](original_data/features/building/final)                              |
+b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트' **'가건물'** '온실']  -->[          '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트'         '온실']<br>
+|[fin.shp](original_data/features/building/final)<-- This data is the one I finally used    |
+
+|final data with  area >= 5 m²|
+|-----------------------------|
+|['연립주택' '주택외건물' '아파트' '공사중건물' '온실' '일반주택']|
+|종류|
+|일반주택     271724|
+|주택외건물    238633|
+|연립주택      98280|
+|아파트       24716|
+|공사중건물      1848|
+|온실         1306|
+|Name: count, dtype: int64|
+
+#### 02_NDVI 
+| NDVI      |
+|-----------|
+|*01* links: https://landsat.gsfc.nasa.gov/satellites/landsat-8/landsat-8-bands/|
+|NDVI = (NIR - Red) / (NIR + Red) band 4 = Red, band 5 = NIR, Landsat 8/9 Surface Reflectance Band 5 & Band 4 from Collection 2 Level-2|
+
+
+#### 03_parks
+| parks   |
+|---------|
+|Area >=100000㎡|
+|final file I used: [parks.shp](original_data/features/parks/e_park/seoul_large_park.shp)|
+#### 04_elevation
+|elevation|
+|---------|
+|file : [elevation.tif](/original_data/features/elevation/seoul_dem.tif)
+
+#### 05 
+
 
 
 
