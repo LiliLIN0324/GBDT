@@ -80,8 +80,8 @@ ST = (DN * 0.00341802) + 149.0                                                  
 
 ### 02 Original source of Features data
 
-#### A_building
-| A_building|
+#### 01_building
+| building  |
 |-----------|
 |*01* links: https://map.ngii.go.kr/ms/map/NlipMap.do
 ![original_building](original_data/features/building/building_01.png)|
