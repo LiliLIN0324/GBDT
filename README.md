@@ -128,7 +128,6 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 
 
 
-
 | BHV     |building shpfile with height|||
 | SVF     |building shpfile with height|||
 | NDVI    |landsat 8 Band 4 & Band 5   |||
