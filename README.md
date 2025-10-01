@@ -495,26 +495,18 @@ codes
 
 -> when I got the 200 itteration CV result. in 
 
-|Year|normal heat day|extreme heat day|heat resilience|
-|----|---------------|----------------|---------------|
-|2016|               |                |               |
-|2023|               |                |               |
-
 ### 04 - best hyperparameter
 
-|    |GBDT random search result|
-|----|-------------------------|
-|2016|                         |
-|2023|                         |
-
-![](excel/GBDT_R².png)
+|    |GBDT random search result                   |
+|----|--------------------------------------------|
+|2016| [](excel/final_GBDT_summary_results.xlsx)  |
+|2023|    None                                    |
 
 
 FINAL fig
-![](fig/GBDT_SDEM%20effect.jpg)
 
 
 ### 05 - predict result with SDEM
 
-|predict|![](fig/predict.jpg)|
+|predict|![](fig/GBDT_SDEM%20effect.jpg)|
 |PDP    |![](fig/PDP.jpg)    |
