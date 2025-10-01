@@ -507,7 +507,12 @@ codes
 |2016|                         |
 |2023|                         |
 
-![](excel/GBDT R².png)
+![](excel/GBDT_R².png)
+
+
+FINAL fig
+![](fig/GBDT_SDEM%20effect.jpg)
+
 
 ### 05 - predict result with SDEM
 
