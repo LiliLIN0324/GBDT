@@ -502,11 +502,6 @@ codes
 |2016| [](excel/final_GBDT_summary_results.xlsx)  |
 |2023|    None                                    |
 
-
-FINAL fig
-
-
 ### 05 - predict result with SDEM
-
 |predict|![](fig/GBDT_SDEM%20effect.jpg)|
 |PDP    |![](fig/PDP.jpg)    |
