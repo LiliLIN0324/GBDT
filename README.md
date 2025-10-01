@@ -119,6 +119,9 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 |---------|
 |Area >=100000㎡|
 |final file I used: [parks.shp](original_data/features/parks/e_park/seoul_large_park.shp)|
+
+|park_1|
+
 #### 04_elevation
 |elevation|
 |---------|
