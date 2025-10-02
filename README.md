@@ -127,18 +127,19 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 |---------|
 |file : [elevation.tif](/original_data/features/elevation/seoul_dem.tif)
 
-#### 05 
 
 
-
-| BHV     |building shpfile with height|||
-| SVF     |building shpfile with height|||
-| NDVI    |landsat 8 Band 4 & Band 5   |||
-| EV      |                            |||
-| WR      |waterbodies file            |||
-| Dist_P  |parks file                  |||
-| Dist_M  |mountain file               |||
-| Dist_W  |waterbodies file            |||
+|name     | description                |photo                             |
+|---------|----------------------------|----------------------------------|
+| BCR     |building cover ratio        |![](variables/Seoul_2building.png)|
+| BHV     |building shpfile with height|![](variables/Seoul_2bh.png)      |
+| SVF     |sky view factors            |![](variables/Seoul_3svf.png)     |
+| NDVI    |landsat 8 Band 4 & Band 5   |![](variables/Seoul_7ndvi.png)    |
+| EV      |elevation                   |![](variables/Seoul_8ev.png)      |
+| WR      |waterbodies file            |![](variables/Seoul_4wb.png)      |
+| Dist_P  |parks file                  |![](variables/Seoul_5bp.png)      |
+| Dist_M  |mountain file               |![](variables/Seoul_6mt.png)      |
+| Dist_W  |waterbodies file            |![](variables/Seoul_4wb.png)      |
 
 
 | Category |Indicator|Unit| Formula                                                 | Data by grids|
@@ -488,12 +489,13 @@ codes
 
 ### 03 - cv result
 |Workflow                                              |
+|------------------------------------------------------|
+| ![](fig/workflow.jpg                          )      |
 |First: we use 20 random seeds to calculate the result.|
 |Second: for each seeds, split the data into 80-20 train-test sets|
 |using K-folder cross validation. split into 5 set, and 20 repeated, randsom seed = 0|
 |using the GBDT with the spercific hyperparameters. and for n_iterration = 200, using random search to find out the best hyperparameters.|
 
--> when I got the 200 itteration CV result. in 
 
 ### 04 - best hyperparameter
 
