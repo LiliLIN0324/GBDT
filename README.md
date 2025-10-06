@@ -376,8 +376,8 @@ y\_fitted = model.predy.flatten()       # (N,)
 
 |Year|GBDT random search result                                                        |
 |----|---------------------------------------------------------------------------------|
-|2016| [](excel/final_GBDT_summary_results.xlsx)                                       |
-|2023|I use ransom seed = 9394; [](excel/2023%20GBDT_Random_Search_Results_0_9394.xlsx)|
+|2016| [final_GBDT_summary_results.xlsx](excel/final_GBDT_summary_results.xlsx)                                       |
+|2023|I use ransom seed = 9394; [2023 20GBDT_Random_Search_Results_0_9394.xlsx](excel/2023%20GBDT_Random_Search_Results_0_9394.xlsx)|
 
 |type   |learning_ rate	|subsample	|max_ depth	|max features	|Final seed	|Final seed CV score	|Final Test score|
 |-------|---------------|-----------|-----------|---------------|-----------|-----------------------|----------------|
