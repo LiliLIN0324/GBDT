@@ -142,17 +142,17 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 | Dist_W  |waterbodies file            |![](variables/Seoul_4wb.png)      |
 
 
-| Category |Indicator|Unit| Formula                                                 | Data by grids|
-|----------|---------|----|---------------------------------------------------------|--------------|
-|  01      | BCR     |%   |BCR = Built-up Area / Total Land Area                    |
-|  01      | BHV     |m   |BHV = SD(Building Heights within unit)                   |
-|  01      | SVF     |N/A |SVF = Visible Sky Hemisphere Area / Total Hemisphere Area|
-|  02      | NDVI    |N/A |NDVI = (NIR - Red) / (NIR + Red)                         |
-|  02      | EV      |m   |Elevation(x,y)=DEM(x,y)                                  |
-|  02      | WR      |%   |WR = Water Surface Area / Total Unit Area                |
-|  03      | Dist_P  |km  |Euclidean_Distance(*Centroid*, Nearest Park)             |
-|  03      | Dist_M  |km  |Euclidean_Distance(*Centroid*, Nearest Mountain)         |
-|  03      | Dist_W  |km  |Euclidean_Distance(*Centroid*, Nearest Waterbody)        |
+|No. |Indicator|Unit| Formula                                                 | Data by grids     |
+|----|---------|----|---------------------------------------------------------|-------------------|
+| 01 | BCR     |%   |BCR = Built-up Area / Total Land Area                    |국토지리정보원 (NGII)|
+| 01 | BHV     |m   |BHV = SD(Building Heights within unit)                   |국토지리정보원 (NGII)|
+| 01 | SVF     |N/A |SVF = Visible Sky Hemisphere Area / Total Hemisphere Area|국가정보포털 (NSDI)  |
+| 02 | NDVI    |N/A |NDVI = (NIR - Red) / (NIR + Red) |USGS - Landsat 8 Operational Land Imager (OLI) surface reflectance from Bands 4 and 5|
+| 02 | EV      |m   |Elevation(x,y)=DEM(x,y)                                  |국토지리정보원 (NGII)|
+| 02 | WR      |%   |WR = Water Surface Area / Total Unit Area                |국가정보포털 (NSDI)  |
+| 03 | Dist_P  |km  |Euclidean_Distance(*Centroid*, Nearest Park)             |Seoul Open Data    |
+| 03 | Dist_M  |km  |Euclidean_Distance(*Centroid*, Nearest Mountain)         |국가정보포털 (NSDI)  |
+| 03 | Dist_W  |km  |Euclidean_Distance(*Centroid*, Nearest Waterbody)        |국가정보포털 (NSDI)  |
 
 
 4 - LST data and variables (based on grid)
@@ -258,8 +258,8 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 \# 6. SDEM models\['SDEM'\] = ML\_Error(yi, x, w=w, slx\_lags=1, method="full", name\_w=w\_name, name\_ds=ds\_name)
 
 
-|  LR test score                         |  model performance                                   |
-|----------------------------------------|------------------------------------------------------|
+|  LR test score                         |  model performance                                    |
+|----------------------------------------|-------------------------------------------------------|
 |[LR test score](csv/LR_test_results.csv)|[model performance](csv/LR_test_results_Model_info.csv)|
 
 ### 05 AIC/BIC
@@ -335,167 +335,46 @@ X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 ---------------------
 
 ### 01 - model comparison
-
-还没做完 # xxx
+|Model        |	Normal_LST	|Extreme_LST	|Resilience_T|
+|-------------|-------------|---------------|------------|
+|Random Forest|1.190	    |1.192	        |7.046       |
+|AdaBoost     |	1.747	    |1.740	        |7.434       |
+|GBDT	      |1.173	    |1.170	        |7.066       |
+|RNN	      |1.102	    |1.088	        |7.366       |
 
 ### 02 - hyperparameter tuning
+#### fixed hyperparameter
+|Hyperparameter 	|Description	                              |Data range     |Type   |
+|-------------------|---------------------------------------------|---------------|-------|
+|n_estimators       |number of trees.                             |4168           |Integer|
+|min_samples_split  |Minimum number of samples for node splitting.|2              |Integer|
 
-codes
-
-      # 这个代码干的事情其实就是用梯度提升回归树 (GradientBoostingRegressor, GBDT) 对地理网格数据建模，并做特征重要性分析 + 偏依赖图 (PDP) 提取。
-    import geopandas as gpd
-    import pandas as pd
-    import numpy as np
-    import os
-    import re
-    import matplotlib.pyplot as plt
-    from sklearn.ensemble import GradientBoostingRegressor
-    from sklearn.metrics import r2_score, mean_squared_error
-    from sklearn.model_selection import RandomizedSearchCV
-    from sklearn.inspection import PartialDependenceDisplay
-    from sklearn.model_selection import train_test_split
-    from sklearn.model_selection import RepeatedKFold
-    from scipy.stats import randint, uniform, loguniform
-
-    # 文件夹路径
-    grid_folder = r'D:\seoul\grids\lst_map\final_clean\480_based'
-    def run_gbdt(grid_folder, years=[2016, 2023], n=0):
-        for year in years:
-            target_vars = [f'nor_{year}', f'ext_{year}', f'hr_{year}']
-            explanatory_vars = ['BCR', 'BHV',  'SVF', 'NDVI', 'EV', 'WR', 'Dist_W', 'Dist_P', 'Dist_M','X','Y'] # 顺序很讲究
-            # 保存结果
-            all_results = []
-            pdp_records = []
-            r2_comparison = []
-
-            param_dist = {
-                'n_estimators': [4168], #4168
-                'learning_rate': loguniform(0.002, 0.355), #(0.002, 0.355)
-                'subsample': uniform(0.545, 0.413), # [0.545,0.958]
-                'max_depth' : randint(5, 14), # [5, 13]
-                'min_samples_split':[2], #2
-                'max_features': uniform(0.335, 0.581), #[0.335,0.916]
-                }
-
-            # === 主循环 ===
-            for filename in os.listdir(grid_folder):
-                if filename.endswith(f'city{year}_lst_ratio_grid_480m_bcr_bhv_ndvi_svf_ev_distbp_distmt_distwb_wr_xy.shp'):
-                    input_path = os.path.join(grid_folder, filename)
-                    match = re.search(r'(\d{3,5})m', filename)
-                    grid_size = match.group(1)
-
-                    gdf = gpd.read_file(input_path)
-                    gdf_clean = gdf.replace([np.inf, -np.inf], np.nan).dropna(subset=target_vars + explanatory_vars)
-
-                    for target in target_vars:
-                        X = gdf_clean[explanatory_vars]
-                        y = gdf_clean[target]
-
-                        #####################################################################
-                        # 用20个 random seeds
-                        np.random.seed(0)  # 固定种子以便复现
-                        random_seeds = np.random.choice(10000, size=20, replace=False)
-                        n = n
-                        #####################################################################
-                        for r in [random_seeds[n]]:
-
-                            # 数据划分
-                            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=r) # 切20次
-
-                            gbdt = GradientBoostingRegressor(random_state=0)
-                            
-                            cv = RepeatedKFold(n_splits=5, n_repeats=20, random_state=0)
-
-                            search = RandomizedSearchCV(
-                                estimator=gbdt,
-                                param_distributions=param_dist,
-                                n_iter= 200,
-                                scoring='r2',
-                                cv=cv, # cross validation
-                                verbose=3,
-                                n_jobs=-1,
-                                random_state=0
-                            )
-
-                            search.fit(X_train, y_train)
-                            folder = os.path.join(grid_folder, r'Machine Learning')
-                            os.makedirs(folder, exist_ok=True)
-
-                            # 先保存一份 checkpoint (CSV，追加方式)
-                            checkpoint_path = os.path.join(folder, f"{year}_{target}_seed{n}_checkpoint.csv")
-                            df_cv = pd.DataFrame(search.cv_results_)
-                            if not os.path.exists(checkpoint_path):
-                                df_cv.to_csv(checkpoint_path, index=False)
-                            else:
-                                df_cv.to_csv(checkpoint_path, mode='a', header=False, index=False)
-                            print(f"[SAVE] checkpoint -> {checkpoint_path}")
-
-                            # 再保存原本的 Excel（完整結果）
-                            cv_path = os.path.join(folder, f"{n}_{r}_GBDT_{target}_cv_results.xlsx")
-                            try:
-                                df_cv.to_excel(cv_path, index=False)
-                                print(f"[SAVE] CV results -> {cv_path}")
-                            except Exception as e:
-                                print(f"[ERROR] Save CV results failed: {cv_path} | {e}")
-                                raise
-
-                            # 使用测试集评估
-                            best_model = search.best_estimator_
-                            y_train_pred = best_model.predict(X_train)
-                            y_test_pred = best_model.predict(X_test)
-
-                            r2_train = best_model.score(X_train, y_train)
-                            r2_test = r2_score(y_test, y_test_pred)
-
-                            rmse_train = np.sqrt(mean_squared_error(y_train, y_train_pred))
-                            rmse_test = np.sqrt(mean_squared_error(y_test, y_test_pred))
-
-                            print(f" {filename} | {target} 最佳参数: {search.best_params_} | R²_train={r2_train:.3f} | R²_test={r2_test:.3f}")
-
-                            for var, importance in zip(explanatory_vars, best_model.feature_importances_):
-                                all_results.append({
-                                    'GridSize': grid_size,
-                                    'Target': target,
-                                    'Feature': var,
-                                    'Random seed':r,
-                                    'FeatureImportance_TrainModel': round(importance, 4),
-                                    'Train_R2': round(r2_train, 4),
-                                    'Train_RMSE': round(rmse_train, 4),
-                                    'Test_R2': round(r2_test, 4),
-                                    'Test_RMSE': round(rmse_test, 4),
-                                    **search.best_params_
-                                })
-                                r2_comparison.append({
-                                    'GridSize': grid_size,
-                                    'Target': target,
-                                    'Random seed':r,
-                                    'Train_R2': round(r2_train, 4),
-                                    'Test_R2': round(r2_test, 4),
-                                    'Train_RMSE': round(rmse_train, 4),
-                                    'Test_RMSE': round(rmse_test, 4)
-                                })
-                    
-
-                    # 保存模型训练后的结果
-                    df_all = pd.DataFrame(all_results)
-
-                    df_all.to_excel(os.path.join(folder, f'{year} GBDT_Random_Search_Results_{n}_{r}.xlsx'), index=False)
-                    df_r2 = pd.DataFrame(r2_comparison)
-                    df_r2 = df_r2.sort_values(['Target', 'GridSize'])
-                    df_r2.to_excel(os.path.join(folder, f'{year} R2_Comparison_Train_vs_Test_{n}_{r}.xlsx'), index=False)
-                    # print("✅ R² train vs test comparison saved.")
-
-    run_gbdt(grid_folder, years=[2016, 2023], n=10)
+#### hyoeroarameter tuning
+|Hyperparameter 	|Description	                            |Data range  	|Type   |
+|-------------------|-------------------------------------------|---------------|-------|
+|learning_rate	    |Step size of each boosting step.        	|(0.002, 0.355) |Real   |
+|subsample	        |Subsample ratio of training instance.   	|[0.545,0.958]	|Real   |
+|max_depth	        |Maximum tree depth.	                    |[5, 13]	    |Integer|
+|max_features	    |Subsample ratio of features for training.	|[0.335,0.916]	|Real   |
 
 ### 03 - cv result
 |Workflow                                              |
 |------------------------------------------------------|
-| ![](fig/workflow.jpg                          )      |
+| ![](fig/workflow_1.jpg                        )      |
+| ![](fig/workflow_2.jpg                        )      |
 |First: we use 20 random seeds to calculate the result.|
 |Second: for each seeds, split the data into 80-20 train-test sets|
 |using K-folder cross validation. split into 5 set, and 20 repeated, randsom seed = 0|
 |using the GBDT with the spercific hyperparameters. and for n_iterration = 200, using random search to find out the best hyperparameters.|
 
+result 
+|type   |learning_ rate	|subsample	|max_ depth|	max features|	Seed count|	Mean CV score|Final seed|Final seed CV score|
+|-------|---------------|-----------|----------|----------------|-------------|--------------|----------|-------------------|
+|Nor_LST|0.0137	        |0.5634	    |5	       |0.6022 	        |20	          |0.9200        |3184      |0.9200             |
+|Ext_LST|0.0137	        |0.5634	    |5	       |0.6022	        |20		      |0.9486        |9394      |0.9486             |
+|HR     |0.0110	        |0.5651	    |5	       |0.8360	        |11		      |0.9161        |3497      |0.9164             |
+|HR     |0.0110	        |0.5651	    |5	       |0.8360	        |11		      |0.9161        |3497      |0.9164             |
+|HR     |0.0196	        |0.5570	    |5	       |0.7118	        |1 		      |0.9161        |3497      |0.9164             |
 
 ### 04 - best hyperparameter
 
@@ -504,6 +383,15 @@ codes
 |2016| [](excel/final_GBDT_summary_results.xlsx)  |
 |2023|    None                                    |
 
-### 05 - predict result with SDEM
+|type   |learning_ rate	|subsample	|max_ depth	|max features	|Final seed	|Final seed CV score	|Final Test score|
+|-------|---------------|-----------|-----------|---------------|-----------|-----------------------|----------------|
+|Nor_LST|0.0137	        |0.5634 	|5	        |0.6022	        |3184	    |0.9200	                |0.9237          |
+|Ext_LST|0.0137	        |0.5634 	|5	        |0.6022	        |9394	    |0.9486	                |0.9538          |
+|HR     |0.0110         |0.5651     |5          |0.8360	        |3497	    |0.9161	                |0.9253          |
+
+### 05 - PDP result compared with GBDT and SDEM
+
+![](fig/111.png)
+↑ This is the final PDP I decide. I finally decide the final method.
+
 |predict|![](fig/GBDT_SDEM%20effect.jpg)|
-|PDP    |![](fig/PDP.jpg)    |
