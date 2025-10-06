@@ -94,17 +94,16 @@ a -> filtered_data = data[data['area'] >= 5]<br>
 b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트' **'가건물'** '온실']  -->[          '주택외건물' '일반주택' '연립주택' '공사중건물' '아파트'         '온실']<br>
 |[fin.shp](original_data/features/building/final)<-- This data is the one I finally used    |
 
-|final data with  area >= 5 m²|
-|-----------------------------|
+|final data with  area >= 5 m²                            |
+|---------------------------------------------------------|
 |['연립주택' '주택외건물' '아파트' '공사중건물' '온실' '일반주택']|
-|종류|
-|일반주택     271724|
-|주택외건물    238633|
-|연립주택      98280|
-|아파트       24716|
-|공사중건물      1848|
-|온실         1306|
-|Name: count, dtype: int64|
+|종류                                                      |
+|일반주택                                             271724|
+|주택외건물                                           238633|
+|연립주택                                              98280|
+|아파트                                               24716|
+|공사중건물                                             1848|
+|온실                                                  1306|
 
 
 #### 02_NDVI 
@@ -115,17 +114,15 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 
 
 #### 03_parks
-| parks   |
-|---------|
-|Area >=100000㎡|
+| parks                                                                                  |
+|----------------------------------------------------------------------------------------|
+|Area >=100000㎡                                                                         |
 |final file I used: [parks.shp](original_data/features/parks/e_park/seoul_large_park.shp)|
 
-|park_1|
-
 #### 04_elevation
-|elevation|
-|---------|
-|file : [elevation.tif](/original_data/features/elevation/seoul_dem.tif)
+|elevation                                                                |
+|-------------------------------------------------------------------------|
+|file : [elevation.tif](/original_data/features/elevation/seoul_dem.tif)  |
 
 
 
@@ -209,7 +206,7 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 
 |      | 2016                                                                   | 2023                                           |
 |------|------------------------------------------------------------------------|------------------------------------------------|
-| unit | ![](fig/2016_isolated_grid.png) <br>1308, 1377, 1411, 1471, 1525, 1690 | ![](fig/2023_isolated_grid.png) <br>1392, 1571 |
+| Unit | ![](fig/2016_isolated_grid.png) <br>1308, 1377, 1411, 1471, 1525, 1690 | ![](fig/2023_isolated_grid.png) <br>1392, 1571 |
 
 ### 01 OLS
 
@@ -318,12 +315,11 @@ X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 
 #### 04 model prediction
 
-        y\_trend = (X\_base @ betas).ravel()     # (n\_points,)
-        # 7) 样本拟合值（含 λ）：直接用库的 predy（已考虑 λ）
-        y\_fitted = model.predy.flatten()       # (N,)
-        \*\*\* predy: nx1 array of predicted y values
+y\_trend = (X\_base @ betas).ravel()     # (n\_points,)
+<!-- 7) 样本拟合值（含 λ）：直接用库的 predy（已考虑 λ） -->
+y\_fitted = model.predy.flatten()       # (N,)
+\*\*\* predy: nx1 array of predicted y values
         
-
 ### 07 Residuals Test
 
 |SDM                         |SDEM                         |
@@ -343,19 +339,19 @@ X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 |RNN	      |1.102	    |1.088	        |7.366       |
 
 ### 02 - hyperparameter tuning
-#### fixed hyperparameter
-|Hyperparameter 	|Description	                              |Data range     |Type   |
-|-------------------|---------------------------------------------|---------------|-------|
-|n_estimators       |number of trees.                             |4168           |Integer|
-|min_samples_split  |Minimum number of samples for node splitting.|2              |Integer|
+**fixed hyperparameter**
+|Hyperparameter 	|Description	                              |Data range       |Type   |
+|-------------------|---------------------------------------------|-----------------|-------|
+|n_estimators       |number of trees.                             |4168             |Integer|
+|min_samples_split  |Minimum number of samples for node splitting.|2                |Integer|
 
-#### hyoeroarameter tuning
-|Hyperparameter 	|Description	                            |Data range  	|Type   |
-|-------------------|-------------------------------------------|---------------|-------|
-|learning_rate	    |Step size of each boosting step.        	|(0.002, 0.355) |Real   |
-|subsample	        |Subsample ratio of training instance.   	|[0.545,0.958]	|Real   |
-|max_depth	        |Maximum tree depth.	                    |[5, 13]	    |Integer|
-|max_features	    |Subsample ratio of features for training.	|[0.335,0.916]	|Real   |
+**Hyperparameter tuning**
+|Hyperparameter 	|Description	                              |Data range    	|Type   |
+|-------------------|---------------------------------------------|-----------------|-------|
+|learning_rate	    |Step size of each boosting step.        	  |(0.002, 0.355)   |Real   |
+|subsample	        |Subsample ratio of training instance.   	  |[0.545,0.958]	|Real   |
+|max_depth	        |Maximum tree depth.	                      |[5, 13]	        |Integer|
+|max_features	    |Subsample ratio of features for training.	  |[0.335,0.916]	|Real   |
 
 ### 03 - cv result
 |Workflow                                              |
@@ -367,8 +363,8 @@ X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 |using K-folder cross validation. split into 5 set, and 20 repeated, randsom seed = 0|
 |using the GBDT with the spercific hyperparameters. and for n_iterration = 200, using random search to find out the best hyperparameters.|
 
-result 
-|type   |learning_ rate	|subsample	|max_ depth|	max features|	Seed count|	Mean CV score|Final seed|Final seed CV score|
+**result**
+|Type   |learning_ rate	|subsample	|max_ depth|	max features|	Seed count|	Mean CV score|Final seed|Final seed CV score|
 |-------|---------------|-----------|----------|----------------|-------------|--------------|----------|-------------------|
 |Nor_LST|0.0137	        |0.5634	    |5	       |0.6022 	        |20	          |0.9200        |3184      |0.9200             |
 |Ext_LST|0.0137	        |0.5634	    |5	       |0.6022	        |20		      |0.9486        |9394      |0.9486             |
@@ -378,10 +374,10 @@ result
 
 ### 04 - best hyperparameter
 
-|    |GBDT random search result                   |
-|----|--------------------------------------------|
-|2016| [](excel/final_GBDT_summary_results.xlsx)  |
-|2023|    None                                    |
+|Year|GBDT random search result                                                        |
+|----|---------------------------------------------------------------------------------|
+|2016| [](excel/final_GBDT_summary_results.xlsx)                                       |
+|2023|I use ransom seed = 9394; [](excel/2023%20GBDT_Random_Search_Results_0_9394.xlsx)|
 
 |type   |learning_ rate	|subsample	|max_ depth	|max features	|Final seed	|Final seed CV score	|Final Test score|
 |-------|---------------|-----------|-----------|---------------|-----------|-----------------------|----------------|
@@ -392,6 +388,6 @@ result
 ### 05 - PDP result compared with GBDT and SDEM
 
 ![](fig/111.png)
-↑ This is the final PDP I decide. I finally decide the final method.
+↑ This is the final PDP I decide. I finally decide the method 3.
 
 |predict|![](fig/GBDT_SDEM%20effect.jpg)|
