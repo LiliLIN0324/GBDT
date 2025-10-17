@@ -388,7 +388,7 @@ y\_fitted = model.predy.flatten()       # (N,)
 ### 05 - PDP result compared with GBDT and SDEM
 |2016 480m             |2016 240m                   |2023 480m                     |
 |----------------------|----------------------------|------------------------------|
-|![](fig/final_GBDT_feature_importance_stacked.png)|![](fig/final_GBDT_feature_importance_stacked_240m.png)|![](fig/2023_final_GBDT_feature_importance_stacked.png)|
+|![](fig/final_GBDT_feature_importance_stacked.png)|![](fig/2016_final_GBDT_feature_importance_stacked_240m.png)|![](fig/2023_final_GBDT_feature_importance_stacked.png)|
 
 ![](fig/111.png)
 ↑ This is the process PDP I used. However, there is very important note that:
@@ -399,4 +399,26 @@ y\_fitted = model.predy.flatten()       # (N,)
 
 4:->>>> in conclusion. After training GBDT model with **training data**, I used **all data** to find the partial importance of each variables, by comparing GBDT and SDEM.
 
-|predict|![](fig/GBDT_SDEM%20effect.jpg)|
+|variables|2016 480m                     |2016 240m                         |
+|---------|------------------------------|----------------------------------|
+| BCR     | ![](fig/pdp/2016BCR480.jpg)  | ![](fig/pdp/2016BCR240.jpg)      |
+| BHV     | ![](fig/pdp/2016BHV480.jpg)  | ![](fig/pdp/2016BHV240.jpg)      |
+| SVF     | ![](fig/pdp/2016SVF480.jpg)  | ![](fig/pdp/2016SVF240.jpg)      |
+| NDVI    | ![](fig/pdp/2016NDVI480.jpg) | ![](fig/pdp/2016NDVI240.jpg)     |
+| EV      | ![](fig/pdp/2016EV480.jpg)   | ![](fig/pdp/2016EV240.jpg)       |
+| WR      | ![](fig/pdp/2016WR480.jpg)   | ![](fig/pdp/2016WR240.jpg)       |
+| Dist_P  | ![](fig/pdp/2016DISTP480.jpg)| ![](fig/pdp/2016DISTP240.jpg)    |
+| Dist_M  | ![](fig/pdp/2016DISTM480.jpg)| ![](fig/pdp/2016DISTM240.jpg)    |
+| Dist_W  | ![](fig/pdp/2016DISTW480.jpg)| ![](fig/pdp/2016DISTW240.jpg)    |
+
+|variables|2016 480m                     |2023 480m                         |
+|---------|------------------------------|----------------------------------|
+| BCR     | ![](fig/pdp/2016BCR480.jpg)  | ![](fig/pdp/2023BCR480.jpg)      |
+| BHV     | ![](fig/pdp/2016BHV480.jpg)  | ![](fig/pdp/2023BHV480.jpg)      |
+| SVF     | ![](fig/pdp/2016SVF480.jpg)  | ![](fig/pdp/2023SVF480.jpg)      |
+| NDVI    | ![](fig/pdp/2016NDVI480.jpg) | ![](fig/pdp/2023NDVI480.jpg)     |
+| EV      | ![](fig/pdp/2016EV480.jpg)   | ![](fig/pdp/2023EV480.jpg)       |
+| WR      | ![](fig/pdp/2016WR480.jpg)   | ![](fig/pdp/2023WR480.jpg)       |
+| Dist_P  | ![](fig/pdp/2016DISTP480.jpg)| ![](fig/pdp/2023DISTP480.jpg)    |
+| Dist_M  | ![](fig/pdp/2016DISTM480.jpg)| ![](fig/pdp/2023DISTM480.jpg)    |
+| Dist_W  | ![](fig/pdp/2016DISTW480.jpg)| ![](fig/pdp/2023DISTW480.jpg)    |
