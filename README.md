@@ -7,7 +7,7 @@ By Lin Lili
 https://lililin0324.github.io/posts/Project-3-ML-HR/
 
 
-## 0 - grid information - based on 480m
+## 0 - Grid information - based on 480m
 
 ------------------------------------
 | grid_original                           | grid_original_satellite                                     |
@@ -189,7 +189,7 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 | Dist_M  | ![](fig/G480_V_DistM.jpg)  | ![](fig/G480_V_DistM_2023.jpg)  |
 | Dist_W  | ![](fig/G480_V_DistW.jpg)  | ![](fig/G480_V_DistW_2023.jpg)  |
 
-## 5 - spatial regression model result
+## 5 - Spatial regression model result
 -----------------------------------
 
 **00 error information**
