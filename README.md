@@ -1,26 +1,19 @@
-
-📂 Assessing Urban Heat Resilience: Nonlinear Impacts of Urban Form Factors Across Scales Using Machine Learning
-================================================================================================================
-
-Lin Lili
+# Assessing Urban Heat Resilience: Nonlinear Impacts of Urban Form Factors Across Scales Using Machine Learning
+By Lin Lili
 --------
+<a href="https://lililin0324.github.io/posts/Project-3-ML-HR/" class="card">
+  <div class="card-content">
+    <h3>Introduction of Assessing Urban Heat Resilience</h3>
+    https://lililin0324.github.io/posts/Project-3-ML-HR/
+  </div>
+</a>
 
-用来记录所有相关的文件信息
+## 0 - grid information - based on 480m
 
-1\. 点击这里访问 Google Drive 文件：
-
-[Google Drive 链接](https://drive.google.com/drive/folders/1eZbPwuhGdsPJmuMucljCuAX7itkSjtiz?usp=drive_link)
-
-* * *
-
-0 - grid information - based on 480m
 ------------------------------------
 | grid_original                           | grid_original_satellite                                     |
 |-----------------------------------------|-------------------------------------------------------------|
 | ![grid_original](fig/grid_original.jpg) | ![grid_original_satellite](fig/grid_original_satellite.jpg) |
-
-
-#### grid valid information
 
 这里展示了我的数据选择过程，随着有效值需求的拔高，以及120和240m grid需要和480m完全对齐，我们最终得到的有效值一览表
 
@@ -31,7 +24,7 @@ Lin Lili
 |![G480_2016](fig/G480_2016.png)|![G480_2023](fig/G480_2023.png)|
 
 
-1 - Extreme heat days and normal heat days identification
+## 1 - Extreme heat days and normal heat days identification
 --------------------------
 |Extreme heat day                                                                  |
 |----------------------------------------------------------------------------------|
@@ -43,7 +36,7 @@ Lin Lili
 |Extreme heat day definition: Apparent Temperature (AT) at percentile over than 95%                  |
 |Regular heat day definition: Apparent Temperature (AT) at percentile 40 - 60 %                      |
 
-2 - Air condition and AT (apperant temperature)
+## 2 - Air condition and AT (apperant temperature)
 -----------------------------------------------
 首先选取气象站。最终我们只选了龙山气象站 ID = 108
 ![20160924](excel/air_station_select.png)
@@ -61,7 +54,7 @@ Lin Lili
 **Final pairs : 20160924 vs 20160807**
 **Final pairs : 20230616 vs 20230819**
 
-3 - LST data and variables (original)
+## 3 - LST data and variables (original)
 -----------------------------------------------
 
 |After I get the apparent temperature>33℃ and percentile>95%, <br>
@@ -152,7 +145,7 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 | 03 | Dist_W  |km  |Euclidean_Distance(*Centroid*, Nearest Waterbody)        |국가정보포털 (NSDI)  |
 
 
-4 - LST data and variables (based on grid)
+## 4 - LST data and variables (based on grid)
 --------------------------
 
 ### 01 statistics of data based on Grid 120, 240, 480 m
@@ -199,7 +192,7 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 | Dist_M  | ![](fig/G480_V_DistM.jpg)  | ![](fig/G480_V_DistM_2023.jpg)  |
 | Dist_W  | ![](fig/G480_V_DistW.jpg)  | ![](fig/G480_V_DistW_2023.jpg)  |
 
-5 - spatial regression model result
+## 5 - spatial regression model result
 -----------------------------------
 
 ### 00 error information
@@ -327,7 +320,7 @@ y\_fitted = model.predy.flatten()       # (N,)
 |![](excel/SDM_residuals.png)|![](excel/SDEM_residuals.png)|
 
 
-4 - GBDT model result
+## 4 - GBDT model result
 ---------------------
 
 ### 01 - model comparison
@@ -422,3 +415,44 @@ y\_fitted = model.predy.flatten()       # (N,)
 | Dist_P  | ![](fig/pdp/2016DISTP480.jpg)| ![](fig/pdp/2023DISTP480.jpg)    |
 | Dist_M  | ![](fig/pdp/2016DISTM480.jpg)| ![](fig/pdp/2023DISTM480.jpg)    |
 | Dist_W  | ![](fig/pdp/2016DISTW480.jpg)| ![](fig/pdp/2023DISTW480.jpg)    |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.card {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin: 0px;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.card-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+.card-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+</style>
