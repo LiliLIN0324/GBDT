@@ -192,14 +192,12 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 ## 5 - spatial regression model result
 -----------------------------------
 
-### 00 error information
-
+**00 error information**
 |      | 2016                                                                   | 2023                                           |
 |------|------------------------------------------------------------------------|------------------------------------------------|
 | Unit | ![](fig/2016_isolated_grid.png) <br>1308, 1377, 1411, 1471, 1525, 1690 | ![](fig/2023_isolated_grid.png) <br>1392, 1571 |
 
-### 01 OLS
-
+**01 OLS**
 y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
 
 | Year | Type              | R²     | RMSE    |
@@ -211,8 +209,7 @@ y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', '
 | 2023 | Extreme heat day  | 0.8622 | 1.6241  |
 | 2023 | Heat resilience   | 0.1298 | 1.3000  |
 
-### 02 Moran's I
-
+**02 Moran's I**
 | Year | Type              | Moran's I | p-value | Expected I | Variance  |
 |------|-------------------|-----------|---------|------------|-----------|
 | 2016 | Normal heat day   | 0.6881    | 0.0010  | -0.0006    | 0.0002    |
@@ -222,7 +219,7 @@ y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', '
 | 2023 | Extreme heat day  | 0.7007    | 0.0010  | -0.0007    | 0.0002    |
 | 2023 | Heat resilience   | 0.8606    | 0.0010  | -0.0007    | 0.0002    |
 
-### 03 LM test
+**03 LM test**
 
 | Year | Type              | LM-Lag (lml) | p-value (lml) | LM-Error (lme) | p-value (lme) | Robust LM-Lag (rlml) | p-value (rlml) | Robust LM-Error (rlme) | p-value (rlme) |
 |------|-------------------|--------------|--------------|----------------|--------------|----------------------|----------------|------------------------|----------------|
@@ -233,7 +230,7 @@ y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', '
 | 2023 | Extreme heat day  | 641.0536     | 1.971e-141   | 2286.3265      | 0            | 52.8418              | 3.615e-13      | 1698.1147              | 0              |
 | 2023 | Heat resilience   | 3168.4077    | 0            | 3154.6372      | 0            | 80.0721              | 3.61e-19       | 66.3016                | 3.869e-16      |
 
-### 04 LR test
+**04 LR test**
 
 explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
 
@@ -249,7 +246,7 @@ explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\
 |----------------------------------------|-------------------------------------------------------|
 |[LR test score](csv/LR_test_results.csv)|[model performance](csv/LR_test_results_Model_info.csv)|
 
-### 05 AIC/BIC
+**05 AIC/BIC**
 
 Comparison between 9 variables and 6 variables
 |  formula       |explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]| 
@@ -262,14 +259,12 @@ Comparison between 9 variables and 6 variables
 
 \--> it's clear that SDEM (SDM) has the best performance.
 
-### 06 final model select: partial SDEM (partial SDM)
+**06 final model select: partial SDEM (partial SDM)**
 explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
 explanatory\_vars\_clean =\['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR'\] 
 X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 
-#### 01 Equation
 <!-- LST = ρWln(LST) + β0+ β1BCR + β2BHV + β3NDVI + β4SVF + β5EV + β6WR + β7DistWB + β8DistGL + β9DistMT +θ1​WBCR+θ2​WBHV+θ3​WNDVI+θ4​WSVF+θ5​WEV+θ6​WWR + ε, ε∼N(0, σ²I) -->
-
 |model   |**partial SDM**                                                                                                      |
 |--------|---------------------------------------------------------------------------------------------------------------------|
 |equation|$LST = \beta_0 + \rho W\ln(LST) + \beta_1 BCR + \beta_2 BHV + \beta_3 NDVI + \beta_4 SVF + \beta_5 EV + \beta_6 WR + \beta_7 DistWB + \beta_8 DistGL + \beta_9 DistMT + \theta_1 WBCR + \theta_2 WBHV + \theta_3 WNDVI + \theta_4 WSVF + \theta_5 WEV + \theta_6 WWR + \varepsilon,\ \varepsilon \sim N(0, \sigma^2 I)$|
@@ -290,34 +285,32 @@ X-> explanatory\_vars; WX -> explanatory\_vars\_clean
 |result\_ext\_2023| ext\_2023 = 40.0883 + 0.0256\*BCR + 0.0006\*BHV + 8.3616\*SVF + -29.4204\*NDVI + -0.0114\*EV + -0.1725\*WR + -0.2396\*Dist\_W + -0.2239\*Dist\_P + -0.1696\*Dist\_M + 0.0193\*W\_BCR + 0.0377\*W\_BHV + 2.9527\*W\_SVF + -4.2769\*W\_NDVI + 0.0026\*W\_EV + -0.0304\*W\_WR + 0.9065\*lambda|
 |result\_hr\_2023 | hr\_2023 = -2.5438 + 0.0004\*BCR + 0.0032\*BHV + -0.6424\*SVF + 1.6928\*NDVI + -0.0007\*EV + 0.0005\*WR + 0.0621\*Dist\_W + 0.1557\*Dist\_P + 0.1643\*Dist\_M + -0.0177\*W\_BCR + -0.0218\*W\_BHV + -1.7902\*W\_SVF + 0.7802\*W\_NDVI + -0.0038\*W\_EV + -0.0004\*W\_WR + 0.9537\*lambda|
 
-#### 02 impact
-
+**02 impact**
 |SDM                               |  SDEM                              |
 |----------------------------------|------------------------------------|
 |[SDM_effects](csv/SDM_effects.csv)|[SDEM_effects](csv/SDEM_effects.csv)|
 
-#### 03 model performance
+**03 model performance**
 
 |  Year    |   SDM                      |   SDEM    |
 |----------|----------------------------|-----------|
 |  2016    |[2016 SDM](csv/2016_SDM.csv)|[2016 SDEM](csv/2016_SDEM.csv)|
 |  2023    |[2023 SDM](csv/2023_SDM.csv)|[2023 SDEM](csv/2023_SDEM.csv)|
 
-#### 04 model prediction
-
+**04 model prediction**
 y\_trend = (X\_base @ betas).ravel()     # (n\_points,)
 <!-- 7) 样本拟合值（含 λ）：直接用库的 predy（已考虑 λ） -->
 y\_fitted = model.predy.flatten()       # (N,)
 \*\*\* predy: nx1 array of predicted y values
         
-### 07 Residuals Test
+**07 Residuals Test**
 
 |SDM                         |SDEM                         |
 |----------------------------|-----------------------------|
 |![](excel/SDM_residuals.png)|![](excel/SDEM_residuals.png)|
 
 
-## 4 - GBDT model result
+## 6 - GBDT model result
 ---------------------
 
 ### 01 - model comparison
