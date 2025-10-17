@@ -388,9 +388,15 @@ y\_fitted = model.predy.flatten()       # (N,)
 ### 05 - PDP result compared with GBDT and SDEM
 |2016 480m             |2016 240m                   |2023 480m                     |
 |----------------------|----------------------------|------------------------------|
-|![](fig/final_GBDT_feature_importance_stacked.png)||
+|![](fig/final_GBDT_feature_importance_stacked.png)|![](fig/final_GBDT_feature_importance_stacked_240m.png)|![](fig/2023_final_GBDT_feature_importance_stacked.png)|
 
 ![](fig/111.png)
-↑ This is the final PDP I decide. I finally decide the method 3.
+↑ This is the process PDP I used. However, there is very important note that:
+1: the model should be implemented with **training data** rather than **test data**
+2: for the PDP, if using **test data** ->>> it can be more suitable and fit to the realistic world.
+                if using **all data**  ->>> it's still ok, with more general usage.
+3: because of the partial SDEM model I used, it's trained by **all data**, the parameters of each variables have already be fixed.Therefore, it's not good for change the final interpretable line chart with only **test data**.
+
+4:->>>> in conclusion. After training GBDT model with **training data**, I used **all data** to find the partial importance of each variables, by comparing GBDT and SDEM.
 
 |predict|![](fig/GBDT_SDEM%20effect.jpg)|
