@@ -1,12 +1,11 @@
 # Assessing Urban Heat Resilience: Nonlinear Impacts of Urban Form Factors Across Scales Using Machine Learning
 By Lin Lili
 --------
-<a href="https://lililin0324.github.io/posts/Project-3-ML-HR/" class="card">
-  <div class="card-content">
-    <h3>Introduction of Assessing Urban Heat Resilience</h3>
-    https://lililin0324.github.io/posts/Project-3-ML-HR/
-  </div>
-</a>
+
+
+**Introduction of Assessing Urban Heat Resilience**
+https://lililin0324.github.io/posts/Project-3-ML-HR/
+
 
 ## 0 - grid information - based on 480m
 
@@ -424,33 +423,3 @@ y\_fitted = model.predy.flatten()       # (N,)
 
 
 
-
-
-
-<style>
-.card {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  margin: 0px;
-  text-decoration: none;
-  color: #000;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-}
-.card-content h3 {
-  margin: 0 0 8px 0;
-  font-size: 18px;
-}
-.card-content p {
-  margin: 0;
-  font-size: 14px;
-  color: #555;
-}
-</style>
