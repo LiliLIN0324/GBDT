@@ -386,6 +386,9 @@ y\_fitted = model.predy.flatten()       # (N,)
 |HR     |0.0110         |0.5651     |5          |0.8360	        |3497	    |0.9161	                |0.9253          |
 
 ### 05 - PDP result compared with GBDT and SDEM
+|2016 480m             |2016 240m                   |2023 480m                     |
+|----------------------|----------------------------|------------------------------|
+|![](fig/final_GBDT_feature_importance_stacked.png)||
 
 ![](fig/111.png)
 ↑ This is the final PDP I decide. I finally decide the method 3.
