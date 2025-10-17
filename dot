@@ -1,0 +1,36 @@
+digraph Personality {
+    rankdir=TB;
+
+    node [shape=box, style=filled, fillcolor=lightblue, fontname="Arial", fontsize=12];
+    edge [color=gray, arrowhead=normal, style=solid, penwidth=1.5];
+
+    性格 -> 中庸;
+    性格 -> 狂狷;
+
+    subgraph cluster_1 {
+        label="中庸性格";
+        color=lightgrey;
+        中庸 -> "可妥协\n善于社交";
+        中庸 -> "温和理性\n现实主义";
+    }
+
+    subgraph cluster_2 {
+        label="狂狷性格";
+        color=lightpink;
+        狂狷 -> "刚直\n原则性强";
+        狂狷 -> "极端实证主义";
+
+        // 图片节点
+        图片节点 [
+            image="D:\D盘桌面\Frame 2608329.jpg",
+            shape=none,
+            label="",
+            fixedsize=true,
+            width=1,    // 宽 3 英寸
+            height=1    // 高 2 英寸
+        ];
+        "极端实证主义" -> 图片节点;
+        "极端实证主义" -> "多神论";
+        "极端实证主义" -> "不可知论";
+    }
+}
