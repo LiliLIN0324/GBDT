@@ -74,7 +74,7 @@ ST = (DN * 0.00341802) + 149.0                                                  
 
 ### 02 Original source of Features data
 
-#### 01_building
+**01_building**
 | building  |
 |-----------|
 |*01* links: https://map.ngii.go.kr/ms/map/NlipMap.do
@@ -99,24 +99,23 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 |온실                                                  1306|
 
 
-#### 02_NDVI 
+**02_NDVI**
 | NDVI      |
 |-----------|
 |*01* links: https://landsat.gsfc.nasa.gov/satellites/landsat-8/landsat-8-bands/|
 |NDVI = (NIR - Red) / (NIR + Red) band 4 = Red, band 5 = NIR, Landsat 8/9 Surface Reflectance Band 5 & Band 4 from Collection 2 Level-2|
 
 
-#### 03_parks
+**03_parks**
 | parks                                                                                  |
 |----------------------------------------------------------------------------------------|
 |Area >=100000㎡                                                                         |
 |final file I used: [parks.shp](original_data/features/parks/e_park/seoul_large_park.shp)|
 
-#### 04_elevation
+**04_elevation**
 |elevation                                                                |
 |-------------------------------------------------------------------------|
 |file : [elevation.tif](/original_data/features/elevation/seoul_dem.tif)  |
-
 
 
 |name     | description                |photo                             |
@@ -130,7 +129,6 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 | Dist_P  |parks file                  |![](variables/Seoul_5bp.png)      |
 | Dist_M  |mountain file               |![](variables/Seoul_6mt.png)      |
 | Dist_W  |waterbodies file            |![](variables/Seoul_4wb.png)      |
-
 
 |No. |Indicator|Unit| Formula                                                 | Data by grids     |
 |----|---------|----|---------------------------------------------------------|-------------------|
