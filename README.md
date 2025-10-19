@@ -64,11 +64,6 @@ users must apply a scaling factor to convert digital numbers (DN) to temperature
 For Landsat Collection 2 Level-2 Surface Temperature products, the following equation is used: <br>
 ST = (DN * 0.00341802) + 149.0                                                              |
 
-### 01 Original source of LST data
-| Year | Normal heat day (Fig, Date)                           | Extreme heat day (Fig, Date)                 | Heat Resilience (Fig, Date)      |
-|------|-------------------------------------------------------|----------------------------------------------|----------------------------------|
-| 2016 |[clipped_20160924_B10_cleaned_LST.tif](original_data/LST/clipped_20160924_B10_cleaned_LST.tif), 99.46%|[clipped_20160807_B10_cleaned_LST.tif](original_data/LST/clipped_20160807_B10_cleaned_LST.tif), 82.53% |[2016_heat_resilience.tif](original_data/LST/2016_heat_resilience.tif), 82.10% |
-| 2023 |[clipped_20230616_B10_cleaned_LST.tif](original_data/LST/clipped_20230616_B10_cleaned_LST.tif), 99.00%|[clipped_20230819_B10_cleaned_LST.tif](original_data/LST/clipped_20230819_B10_cleaned_LST.tif), 72.66% |[2023_heat_resilience.tif](original_data/LST/2023_heat_resilience.tif), 72.25% |
 
 
 ### 02 Original source of Features data
@@ -117,17 +112,12 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 |file : [elevation.tif](/original_data/features/elevation/seoul_dem.tif)  |
 
 
-|name     | description                |photo                             |
-|---------|----------------------------|----------------------------------|
-| BCR     |building cover ratio        |![](variables/Seoul_2building.png)|
-| BHV     |building shpfile with height|![](variables/Seoul_2bh.png)      |
-| SVF     |sky view factors            |![](variables/Seoul_3svf.png)     |
-| NDVI    |landsat 8 Band 4 & Band 5   |![](variables/Seoul_7ndvi.png)    |
-| EV      |elevation                   |![](variables/Seoul_8ev.png)      |
-| WR      |waterbodies file            |![](variables/Seoul_4wb.png)      |
-| Dist_P  |parks file                  |![](variables/Seoul_5bp.png)      |
-| Dist_M  |mountain file               |![](variables/Seoul_6mt.png)      |
-| Dist_W  |waterbodies file            |![](variables/Seoul_4wb.png)      |
+|Type1    | description                |photo                             |Type2    | description                |photo                             |Type3    | description                |photo                             |
+|---------|----------------------------|----------------------------------|---------|----------------------------|----------------------------------|---------|----------------------------|----------------------------------|
+| BCR     |building cover ratio        |![](variables/Seoul_2building.png)| NDVI    |Normalized difference vegetation index   |![](variables/Seoul_7ndvi.png)    | Dist_W  |waterbodies file            |![](variables/Seoul_4wb.png)      |
+| BHV     |building shpfile with height|![](variables/Seoul_2bh.png)      | EV      |elevation                   |![](variables/Seoul_8ev.png)      | Dist_P  |parks file                  |![](variables/Seoul_5bp.png)      |
+| SVF     |sky view factors            |![](variables/Seoul_3svf.png)     | WR      |waterbodies file            |![](variables/Seoul_4wb.png)      | Dist_M  |mountain file               |![](variables/Seoul_6mt.png)      |
+
 
 |No. |Indicator|Unit| Formula                                                 | Data by grids     |
 |----|---------|----|---------------------------------------------------------|-------------------|
@@ -150,6 +140,11 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 |2016 (G = 120,240,480)                                            |2023 (G = 120,240,480)                                            |
 |------------------------------------------------------------------|------------------------------------------------------------------|
 |[2016_Descriptive_statistics](csv/2016_Descriptive_statistics.csv)|[2023_Descriptive_statistics](csv/2023_Descriptive_statistics.csv)|
+### 01 Original source of LST data
+| Year | Normal heat day (Fig, Date)                           | Extreme heat day (Fig, Date)                 | Heat Resilience (Fig, Date)      |
+|------|-------------------------------------------------------|----------------------------------------------|----------------------------------|
+| 2016 |![20160924.jpg](fig/original/20160924.jpg) 99.46%|![20160807.jpg](fig/original/20160807.jpg) 82.53% |![2016_HR.jpg](fig/original/2016_HR.jpg) 82.10% |
+| 2023 |![20230616.jpg](fig/original/20230616.jpg) 99.00%|![20230819.jpg](fig/original/20230819.jpg) 72.66% |![2023_HR.jpg](fig/original/2023_HR.jpg) 72.25% |
 
 ### 02 Comparison of LST data (original)
 
