@@ -191,6 +191,9 @@ b -> [**'무벽건물'** '주택외건물' '일반주택' '연립주택' '공사
 |      | 2016                                                                   | 2023                                           |
 |------|------------------------------------------------------------------------|------------------------------------------------|
 | Unit | ![](fig/2016_isolated_grid.png) <br>1308, 1377, 1411, 1471, 1525, 1690 | ![](fig/2023_isolated_grid.png) <br>1392, 1571 |
+|Clean 480m| ![alt text](fig/clean_2016.png) <br> 1855 valid  |![alt text](fig/clean_2023.png) 1570 valid|
+|Clean 240m|![alt text](image-2.png)<br>7418 valid|![alt text](image-4.png)<br> 6280 valid |
+|Clean 120m|![alt text](image-1.png)<br>29611 valid|![alt text](image-5.png)<br> 25089 valid|
 
 **01 OLS**
 y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', 'NDVI', 'EV', 'WR', 'Dist\_W', 'Dist\_P', 'Dist\_M'\]
@@ -203,6 +206,14 @@ y = β₁X₁ + β₂X₂ + ...+ ε explanatory\_vars = \['BCR', 'BHV', 'SVF', '
 | 2023 | Normal heat day   | 0.9206 | 1.1580  |
 | 2023 | Extreme heat day  | 0.8622 | 1.6241  |
 | 2023 | Heat resilience   | 0.1298 | 1.3000  |
+
+
+| Year | Type              | 480M   | 240M    |120M     |
+|------|-------------------|--------|---------|---------|
+| 2016 | Normal heat day   | 0.8539 | 0.8140  |0.7750   |
+| 2016 | Extreme heat day  | 0.9055 | 0.8828  |0.8518   |
+| 2016 | Heat resilience   | 0.8102 | 0.8053  |0.7801   |
+
 
 **02 Moran's I**
 | Year | Type              | Moran's I | p-value | Expected I | Variance  |
